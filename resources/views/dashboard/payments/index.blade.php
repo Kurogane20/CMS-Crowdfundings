@@ -75,7 +75,9 @@
                     <td>
                         <a href="{{route('payment_view', $payment->id)}}" class="btn btn-xs btn-default"><i class="fa fa-eye"></i> </a>
 
-                        <a href="{{route('payment_delete', $payment->id)}}" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure?')"><i class="fa fa-trash"></i> </a>
+                        <a href="{{route('payment_delete', $payment->id)}}" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure?')">
+                            <i class="fa fa-trash"></i>
+                        </a>
                     </td>
 
                 </tr>

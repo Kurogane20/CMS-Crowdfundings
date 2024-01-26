@@ -32,12 +32,13 @@ class ProfileController extends Controller
         return view('dashboard.profile.edit', compact('title', 'user', 'countries'));
     }
 
-    public function update($id = null, Request $request){
+    public function update(Request $request){
         if(config('app.is_demo')){
             return redirect()->back()->with('error', 'This feature has been disable for demo');
         }
 
         $user = Auth::user();
+        $id = $user->id;
         if ($id){
             $user = User::find($id);
         }

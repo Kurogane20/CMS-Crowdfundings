@@ -73,7 +73,7 @@
                 <input type="hidden" name="campaign_id" value="{{$campaign->id}}" />
                 <div class="donate_amount_field">
                     <div class="donate_currency">{!! get_currency_symbol(get_option('currency_sign')) !!}</div>
-                    <input type="number" step="1" min="1" name="amount" class="form-control" value="{!! get_amount_raw($campaign->recommended_amount) !!}" placeholder="@lang('app.enter_amount')" />
+                    <input type="number" step="1" min="1" name="amount" class="form-control" value="{!! get_amount_raw($campaign->recommended_amount) !!}" style="text-indent: 10px;" placeholder="@lang('app.enter_amount')" />
                 </div>
 
                 @if($campaign->amount_prefilled())

@@ -158,6 +158,18 @@ class PaymentController extends Controller
         $payment->status = $status;
         $payment->save();
 
+        // gunakan rollback
+        // update payment kmudian update campaign 
+        if ($status == 'success') {
+            $campaign = Campaign::find($payment->campaign_id);
+            $campaign->total_funded += $payment->amount;
+            $campaign->total_payments++;
+            $campaign->total_payments = Payment::where('campaign_id', $campaign->id)->where('status', 'success')->count();
+    
+            // Save the updated totals
+            $campaign->save();
+        }
+        
         return back()->with('success', trans('app.payment_status_changed'));
     }
 

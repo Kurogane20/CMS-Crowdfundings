@@ -70,7 +70,7 @@ if ( ! function_exists('get_post_url')){
  * @return logo url
  */
 function logo_url(){
-    return '/storage/uploads/logo/'.get_option('logo');
+    return '/uploads/logo/'.get_option('logo');
 }
 
 /**
