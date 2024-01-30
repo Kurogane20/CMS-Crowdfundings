@@ -23,7 +23,7 @@
                         ?>
 
                         <div class="row">
-                            @if(get_option('enable_stripe') == 1)
+                            {{-- @if(get_option('enable_stripe') == 1)
                                 <div class="col-md-4">
                                     <div class="stripe-button-container">
                                         <script
@@ -53,7 +53,7 @@
                                         <button type="submit" class="btn btn-info text-white"> <i class="fa fa-paypal"></i> @lang('app.pay_with_paypal')</button>
                                     </form>
                                 </div>
-                            @endif
+                            @endif --}}
 
 
                             @if(get_option('enable_bank_transfer') == 1)

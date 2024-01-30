@@ -94,13 +94,15 @@
                 </div>
 
                 <div class="col-md-4">
-                    @include('layouts.public.partials.get_start_section')
+                    @include('public.campaigns.partials.sidebar')
                 </div>
+                
 
             </div>
         </div>
 
     </section>
+    @include('layouts.public.partials.get_start_section')
 
 @endsection
 

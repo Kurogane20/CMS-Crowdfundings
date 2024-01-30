@@ -73,7 +73,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <p class="footer-copyright"> {!! get_text_tpl(get_option('copyright_text')) !!} </p>
-                    <p class="d-none d-sm-inline text-white text pull-right">Harambee <code>v.{{config('app.version')}}</code>, by <a href="https://davymaish.github.io" target="_blank">David Maina</a> </p>
+                   
                 </div>
             </div>
         </div>
