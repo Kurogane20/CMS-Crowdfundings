@@ -117,7 +117,7 @@ $auth_user = \Auth::user();
                     <div class="card-header">
                         <div class="row">
                             <div class="col-xs-12">
-                                <div class="huge">{{100 - $campaign_owner_comission}}%</div>
+                                <div class="huge">{{100 - intval($campaign_owner_comission)}}%</div>
                                 <div>@lang('app.platform_owner_will_receive')</div>
                             </div>
                         </div>
