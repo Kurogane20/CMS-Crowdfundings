@@ -137,10 +137,7 @@ $auth_user = \Auth::user();
                             <div class="col-xs-12">
                                 <div class="huge">
                                     @php
-                                    $campaign_owner_commission = floatval($campaign_owner_commission); // Convert to float if it's a string
-                                    $payment_amount = floatval($payment_amount); // Convert to float if it's a string
-
-                                    $platform_owner_commission = ((100 - $campaign_owner_commission) * $payment_amount) / 100;
+                                    $platform_owner_commission = ( (100 - floatval($campaign_owner_comission)) * $payment_amount ) / 100;
                                     @endphp
 
                                     {!! get_amount($platform_owner_commission) !!}
