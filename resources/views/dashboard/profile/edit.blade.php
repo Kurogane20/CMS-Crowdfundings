@@ -31,7 +31,7 @@
                         <option value="">Select Gender</option>
                         <option value="male" {{ $user->gender == 'male'?'selected':'' }}>Male</option>
                         <option value="female" {{ $user->gender == 'female'?'selected':'' }}>Fe-Male</option>
-                        <option value="third_gender" {{ $user->gender == 'third_gender'?'selected':'' }}>Third Gender</option>
+                        
                     </select>
 
                     {!! $errors->has('gender')? '<p class="help-block">'.$errors->first('gender').'</p>':'' !!}

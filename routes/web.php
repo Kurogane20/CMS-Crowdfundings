@@ -46,10 +46,6 @@ Route::get('categories/{id}/{slug?}', ['as' => 'single_category', 'uses' => 'Pub
 Route::any('add-to-cart/{reward_id?}', ['as' => 'add_to_cart', 'uses' => 'Public\CheckoutController@addToCart']);
 Route::get('checkout', ['as' => 'checkout', 'uses' => 'Public\CheckoutController@checkout']);
 Route::post('checkout', ['uses' => 'Public\CheckoutController@checkoutPost']);
-Route::post('checkout/paypal', ['as' => 'payment_paypal_receive','uses' => 'Public\CheckoutController@paypalRedirect']);
-Route::any('checkout/paypal-success/{transaction_id?}', ['as' => 'payment_success','uses' => 'Public\CheckoutController@paymentSuccess']);
-Route::any('checkout/paypal-notify/{transaction_id?}', ['as' => 'paypal_notify', 'uses' => 'Public\CheckoutController@paypalNotify']);
-Route::post('checkout/stripe', ['as' => 'payment_stripe_receive', 'uses' => 'Public\CheckoutController@paymentStripeReceive']);
 Route::post('checkout/bank-transfer', ['as' => 'bank_transfer_submit', 'uses' => 'Public\CheckoutController@paymentBankTransferReceive']);
 
 // Social Logins

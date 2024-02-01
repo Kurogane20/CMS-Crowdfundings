@@ -754,6 +754,9 @@ overwriting bootstrap
 .bankPaymetWrap{
     margin-top: 50px;
 }
+.mandiriPaymetWrap{
+    margin-top: 50px;
+}
 .bankPaymetWrap .jumbotron {
     padding: 20px !important;
 }

@@ -48,7 +48,7 @@ class ProfileController extends Controller
         ];
         $this->validate($request, $rules);
 
-        $inputs = array_except($request->input(), ['_token', 'photo']);
+        $inputs = array_except($request->input(), ['_token', 'photo','gender']);
         $user->update($inputs);
 
         if ($request->hasFile('photo')){
@@ -91,6 +91,13 @@ class ProfileController extends Controller
             }
 
         }
+        $data = [
+            'gender'       => $request->gender,
+            'address'      => $request->address,
+            'phone'        => $request->phone,
+            'country_id'   => $request->country_id            
+        ];
+        $update = User::whereId($id)->update($data);
 
         return back()->with('success', trans('app.profile_edit_success_msg'));
     }
