@@ -71,7 +71,7 @@ class SettingsController extends Controller
 
             $image_name = strtolower(time().str_random(5).'-'.str_slug($file_base_name)).'.' . $image->getClientOriginalExtension();
 
-            $upload_dir = 'public/uploads/logo/';
+            $upload_dir = './uploads/logo/';
             if ( ! file_exists($upload_dir)){
                 mkdir($upload_dir, 0777, true);
             }
