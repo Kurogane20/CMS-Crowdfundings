@@ -39,7 +39,7 @@
                 <ul class="navbar-nav ms-auto">
                     
                     <li class="nav-item">
-                        <a href="{{route('start_campaign')}}" class=" btn btn-info rounded-pill text-white">
+                        <a href="{{route('start_campaign')}}" class=" btn btn-filled">
                             @lang('app.start_a_campaign')
                         </a>
                     </li>

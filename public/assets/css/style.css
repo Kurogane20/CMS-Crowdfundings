@@ -26,7 +26,7 @@ a{
     text-decoration: none;
 }
 a:hover{
-    color: #2d8dbe;
+    color: #007749;
     text-decoration: none;
 }
 nav.navbar{
@@ -43,7 +43,7 @@ nav.navbar{
 }
 
 img.main-logo {
-    max-height: 20px;
+    max-height: 40px;
     width: auto;
 }
 .search-form button {
@@ -63,11 +63,11 @@ img.main-logo {
 }
 
 a.top-start-btn{
-    background: #337ab7;
+    background: #00582f;
     color: #ffffff !important;
 }
 a.top-start-btn:hover{
-    background: #31708f !important;
+    background: #318f58 !important;
     color: #ffffff !important;
 }
 .main-banner {
@@ -79,7 +79,7 @@ a.top-start-btn:hover{
 }
 .main-banner::before {
     content: "";
-    background: rgba(0, 0, 0, 0) radial-gradient(at center bottom , #0096d6 12%, #00328f) repeat scroll 0 0;
+    background: rgba(0, 0, 0, 0) radial-gradient(at center bottom , #018538 12%, #008f48) repeat scroll 0 0;
     height: 100%;
     left: 0;
     opacity: 0.7;
@@ -173,8 +173,8 @@ Section
 }
 .section-action-btn {
     text-decoration: none;
-    border: 1px solid #337ab7;
-    color: #337ab7;
+    border: 1px solid #318f58;
+    color: #318f58;
     font-size: 18px;
     padding: 10px 30px;
     text-align: center;
@@ -182,7 +182,7 @@ Section
     position: relative;
 }
 .section-action-btn:hover {
-    background: #337ab7;
+    background: #318f58;
     color: #ffffff;
 }
 /*--------------------------------------------------------------
@@ -319,29 +319,29 @@ Campaign, campaign box, campaign preview
     font-size: 200%;
 }
 .btn-outline {
-    border: 2px solid #337ab7;
-    color: #337ab7;
+    border: 2px solid #318f58;
+    color: #318f58;
     min-width: 150px;
 }
 .btn-outline:hover {
-    background: #337ab7;
+    background: #318f58;
     color: #ffffff;
 }
 .btn-filled{
-    border: 2px solid #337ab7;
-    background: #337ab7;
+    border: 2px solid #318f58;
+    background: #318f58;
     color: #ffffff;
     min-width: 150px;
 }
 .btn-filled:hover{
-    border: 2px solid #31708f;
-    background: #31708f;
+    border: 2px solid #318f58;
+    background: #318f58;
     color: #ffffff;
 }
 
 .btn-lg-outline {
-    border: 2px solid #337ab7;
-    color: #337ab7;
+    border: 2px solid #02500f;
+    color: #015331;
     background: #ffffff;
     min-width: 150px;
     padding: 20px 50px;
@@ -349,12 +349,12 @@ Campaign, campaign box, campaign preview
     transition: background-color 0.25s ease-out 0s, color 0.25s ease-out 0s;
 }
 .btn-lg-outline:hover {
-    background: #337ab7;
+    background: #015331;
     color: #ffffff;
 }
 .btn-lg-filled{
-    border: 2px solid #337ab7;
-    background: #337ab7;
+    border: 2px solid #02500f;
+    background: #015331;
     color: #ffffff;
     min-width: 150px;
     padding: 20px 50px;
@@ -362,8 +362,8 @@ Campaign, campaign box, campaign preview
     transition: background-color 0.25s ease-out 0s, color 0.25s ease-out 0s;
 }
 .btn-lg-filled:hover{
-    border: 2px solid #31708f;
-    background: #31708f;
+    border: 2px solid #318f6b;
+    background: #318f7b;
     color: #ffffff;
 }
 
@@ -384,7 +384,7 @@ Single campaign
 .single-campaign-header{
     background: #f7f7f7;
     padding: 40px 0 0;
-    border-bottom: 3px solid #1aa7db;
+    border-bottom: 3px solid #318f58;
     margin-bottom: 20px;
 }
 h1.single-campaign-title {
@@ -561,7 +561,7 @@ Reward
     margin-bottom: 10px;
 }
 .reward-box span.reward-amount strong{
-    color: #1aa7db;
+    color: #318f58;
 }
 .reward-box span.reward-text {
     margin-bottom: 10px;
@@ -570,8 +570,8 @@ Reward
     font-weight: 100;
 }
 .reward-box .reward-button{
-    border: 2px solid #1aa7db;
-    color: #1aa7db;
+    border: 2px solid #318f58;
+    color: #318f58;
     width: 100%;
     line-height: 45px;
     text-align: center;
@@ -581,7 +581,7 @@ Reward
 }
 
 .reward-box:hover .reward-button{
-    background: #1aa7db;
+    background: #318f58;
     color: #ffffff;
 }
 
@@ -594,8 +594,8 @@ Reward
     border: 1px solid #eeeeee;
 }
 .reward-box.reward-disable:hover .reward-button{
-    border: 2px solid #1aa7db;
-    color: #1aa7db;
+    border: 2px solid #318f58;
+    color: #318f58;
     background: #ffffff;
 }
 /*--------------------------------------------------------------
@@ -688,8 +688,8 @@ section.auth-form{
 Footer
 --------------------------------------------------------------*/
 footer {
-    background: #1b3050;
-    color: #919191;
+    background: #026139;
+    color: #ffffff;
     font-weight: 300;
 }
 .footer-top{
@@ -723,7 +723,7 @@ footer {
     padding-left: 5px;
 }
 .footer-widget ul li a{
-    color: #919191;
+    color: #ffffff;
 }
 .footer-bottom {
     border-top: 1px solid #1b4050;
@@ -739,6 +739,7 @@ overwriting bootstrap
 .progress-bar{
     background-image: none;
     box-shadow: none;
+    background-color: #008f48;
 }
 .panel {
     background-color: #fff;
@@ -766,7 +767,7 @@ overwriting bootstrap
     text-align: center;
 }
 .footer-campaign-stats h4{
-    color: #337ab7;
+    color: #318f58;
 }
 
 .wrap-404{

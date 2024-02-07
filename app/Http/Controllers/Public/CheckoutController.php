@@ -329,11 +329,11 @@ class CheckoutController extends Controller
 
     public function paymentBankTransferReceive(Request $request){
         $rules = [
-            'bank_swift_code'   => 'required',
+            // 'bank_swift_code'   => 'required',
             'account_number'    => 'required',
-            'branch_name'       => 'required',
-            'branch_address'    => 'required',
-            'account_name'      => 'required',
+            // 'branch_name'       => 'required',
+            // 'branch_address'    => 'required',
+            // 'account_name'      => 'required',
         ];
         $this->validate($request, $rules);
 

@@ -21,7 +21,7 @@
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a href="/" class=" btn btn-info rounded-pill text-white">
+                        <a href="/" class=" btn btn-filled">
                             <i class="fa fa-home"></i> @lang('app.home')
                         </a>
                     </li>

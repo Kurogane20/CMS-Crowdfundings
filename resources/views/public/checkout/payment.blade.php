@@ -32,11 +32,11 @@
                                 </div>
                             @endif
 
-                            @if(get_option('enable_bank_transfer') == 1)
+                            {{-- @if(get_option('enable_bank_transfer') == 1)
                                 <div class="col-md-4">
                                     <button class="btn btn-primary" id="mandiriTransferBtn"><i class="fa fa-bank"></i> Pay With Mandiri</button>
                                 </div>
-                            @endif
+                            @endif --}}
                         </div>
 
                         @if(get_option('enable_bank_transfer') == 1)
@@ -54,10 +54,10 @@
                                             <h4>@lang('app.bank_payment_instruction')</h4>
 
                                             <table class="table">
-                                                <tr>
+                                                {{-- <tr>
                                                     <th>@lang('app.bank_swift_code')</th>
                                                     <td>{{get_option('bank_swift_code') }}</td>
-                                                </tr>
+                                                </tr> --}}
                                                 <tr>
                                                     <th>@lang('app.account_number')</th>
                                                     <td>{{get_option('account_number') }}</td>
@@ -66,7 +66,7 @@
                                                     <th>@lang('app.branch_name')</th>
                                                     <td>{{get_option('branch_name') }}</td>
                                                 </tr>
-                                                <tr>
+                                                {{-- <tr>
                                                     <th>@lang('app.branch_address')</th>
                                                     <td>{{get_option('branch_address') }}</td>
                                                 </tr>
@@ -77,7 +77,7 @@
                                                 <tr>
                                                     <th>@lang('app.iban')</th>
                                                     <td>{{get_option('iban') }}</td>
-                                                </tr>
+                                                </tr> --}}
                                             </table>
                                         </div>
 
@@ -86,14 +86,14 @@
                                         <form action="{{route('bank_transfer_submit')}}" id="bankTransferForm" class="payment-form" method="post" enctype="multipart/form-data" > @csrf
 
 
-                                            <div class="row mb-3 {{ $errors->has('bank_swift_code')? 'is-invalid':'' }}">
+                                            {{-- <div class="row mb-3 {{ $errors->has('bank_swift_code')? 'is-invalid':'' }}">
                                                 <label for="bank_swift_code" class="col-sm-4 col-form-label">
                                                     @lang('app.bank_swift_code') <span class="field-required">*</span></label>
                                                 <div class="col-sm-8">
                                                     <input type="text" class="form-control" id="bank_swift_code" value="{{ old('bank_swift_code') }}" name="bank_swift_code" placeholder="@lang('app.bank_swift_code')">
                                                     {!! $errors->has('bank_swift_code')? '<p class="help-block">'.$errors->first('bank_swift_code').'</p>':'' !!}
                                                 </div>
-                                            </div>
+                                            </div> --}}
 
                                             <div class="row mb-3 {{ $errors->has('account_number')? 'is-invalid':'' }}">
                                                 <label for="account_number" class="col-sm-4 col-form-label">@lang('app.account_number') <span class="field-required">*</span></label>
@@ -111,7 +111,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="row mb-3 {{ $errors->has('branch_address')? 'is-invalid':'' }}">
+                                            {{-- <div class="row mb-3 {{ $errors->has('branch_address')? 'is-invalid':'' }}">
                                                 <label for="branch_address" class="col-sm-4 col-form-label">@lang('app.branch_address') <span class="field-required">*</span></label>
                                                 <div class="col-sm-8">
                                                     <input type="text" class="form-control" id="branch_address" value="{{ old('branch_address') }}" name="branch_address" placeholder="@lang('app.branch_address')">
@@ -133,7 +133,7 @@
                                                     <input type="text" class="form-control" id="iban" value="{{ old('iban') }}" name="iban" placeholder="@lang('app.iban')">
                                                     {!! $errors->has('iban')? '<p class="help-block">'.$errors->first('iban').'</p>':'' !!}
                                                 </div>
-                                            </div>
+                                            </div> --}}
 
                                             <div class="row mb-3">
                                                 <div class="offset-sm-4 col-sm-8">
@@ -149,7 +149,7 @@
 
                             </div>
                         @endif
-                        @if(get_option('enable_bank_transfer') == 1)
+                        {{-- @if(get_option('enable_bank_transfer') == 1)
                             <div class="mandiriPaymetWrap" style="display: none;">
 
                                 <div class="row">
@@ -258,7 +258,7 @@
                                 </div>
 
                             </div>
-                        @endif
+                        @endif --}}
                         
 
                     </div>

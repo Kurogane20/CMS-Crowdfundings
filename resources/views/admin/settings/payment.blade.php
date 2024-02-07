@@ -7,17 +7,17 @@
     <form action="{{route('save_settings')}}" class="form-horizontal" method="post" enctype="multipart/form-data" > 
         @csrf
 
-        <div class="form-check mb-3 {{ $errors->has('enable_paypal')? 'is-invalid':'' }}">
+        {{-- <div class="form-check mb-3 {{ $errors->has('enable_paypal')? 'is-invalid':'' }}">
             <input class="form-check-input" type="checkbox" value="1" name="enable_paypal" {{ get_option('enable_paypal') == 1 ? 'checked="checked"': '' }}>
             <label class="form-check-label">@lang('app.enable_paypal')</label>
             {!! $errors->has('type')? '<p class="help-block">'.$errors->first('type').'</p>':'' !!}
-        </div>
+        </div> --}}
 
-        <div class="form-check mb-3 {{ $errors->has('enable_stripe')? 'is-invalid':'' }}">
+        {{-- <div class="form-check mb-3 {{ $errors->has('enable_stripe')? 'is-invalid':'' }}">
             <input class="form-check-input" type="checkbox" value="1" name="enable_stripe" {{ get_option('enable_stripe') == 1 ? 'checked="checked"': '' }}>
             <label class="form-check-label">@lang('app.enable_stripe')</label>
             {!! $errors->has('type')? '<p class="help-block">'.$errors->first('type').'</p>':'' !!}
-        </div>
+        </div> --}}
 
         <div class="form-check mb-3 {{ $errors->has('enable_bank_transfer')? 'is-invalid':'' }}">
             <input class="form-check-input" type="checkbox" value="1" name="enable_bank_transfer" {{ get_option('enable_bank_transfer') == 1 ? 'checked="checked"': '' }}>
@@ -25,7 +25,7 @@
             {!! $errors->has('type')? '<p class="help-block">'.$errors->first('type').'</p>':'' !!}
         </div>
 
-        <div id="paypal_settings_wrap" style="display: {{ get_option('enable_paypal') == 1 ? 'block' : 'none' }}">
+        {{-- <div id="paypal_settings_wrap" style="display: {{ get_option('enable_paypal') == 1 ? 'block' : 'none' }}">
             <hr />
 
             <legend>@lang('app.paypal_settings')</legend>
@@ -44,9 +44,9 @@
                 </div>
             </div>
 
-        </div>
+        </div> --}}
 
-        <div id="stripe_settings_wrap" style="display: {{ get_option('enable_stripe') == 1 ? 'block' : 'none' }}">
+        {{-- <div id="stripe_settings_wrap" style="display: {{ get_option('enable_stripe') == 1 ? 'block' : 'none' }}">
             <hr />
 
             <legend>@lang('app.stripe_settings')</legend>
@@ -88,7 +88,7 @@
                 </div>
             </div>
 
-        </div>
+        </div> --}}
 
         <div class="bankPaymetWrap" style="display: {{ get_option('enable_bank_transfer') == 1 ? 'block' : 'none' }}">
 
@@ -96,16 +96,16 @@
 
             <legend>@lang('app.bank_transfer_settings')</legend>
 
-            <div class="row mb-3 {{ $errors->has('bank_swift_code')? 'is-invalid':'' }}">
+            {{-- <div class="row mb-3 {{ $errors->has('bank_swift_code')? 'is-invalid':'' }}">
                 <label for="bank_swift_code" class="col-sm-4 col-form-label">@lang('app.bank_swift_code') <span class="field-required">*</span></label>
                 <div class="col-sm-8">
                     <input type="text" class="form-control" id="bank_swift_code" value="{{ get_option('bank_swift_code') }}" name="bank_swift_code" placeholder="@lang('app.bank_swift_code')">
                     {!! $errors->has('bank_swift_code')? '<p class="help-block">'.$errors->first('bank_swift_code').'</p>':'' !!}
                 </div>
-            </div>
+            </div> --}}
 
             <div class="row mb-3 {{ $errors->has('account_number')? 'is-invalid':'' }}">
-                <label for="account_number" class="col-sm-4 col-form-label">@lang('app.account_number') <span class="field-required">*</span></label>
+                <label for="account_number" class="col-sm-4 col-form-label">Nomor Rekening <span class="field-required">*</span></label>
                 <div class="col-sm-8">
                     <input type="text" class="form-control" id="account_number" value="{{ get_option('account_number') }}" name="account_number" placeholder="@lang('app.account_number')">
                     {!! $errors->has('account_number')? '<p class="help-block">'.$errors->first('account_number').'</p>':'' !!}
@@ -113,14 +113,14 @@
             </div>
 
             <div class="row mb-3 {{ $errors->has('branch_name')? 'is-invalid':'' }}">
-                <label for="branch_name" class="col-sm-4 col-form-label">@lang('app.branch_name') <span class="field-required">*</span></label>
+                <label for="branch_name" class="col-sm-4 col-form-label">Nama Bank <span class="field-required">*</span></label>
                 <div class="col-sm-8">
                     <input type="text" class="form-control" id="branch_name" value="{{ get_option('branch_name') }}" name="branch_name" placeholder="@lang('app.branch_name')">
                     {!! $errors->has('branch_name')? '<p class="help-block">'.$errors->first('branch_name').'</p>':'' !!}
                 </div>
             </div>
 
-            <div class="row mb-3 {{ $errors->has('branch_address')? 'is-invalid':'' }}">
+            {{-- <div class="row mb-3 {{ $errors->has('branch_address')? 'is-invalid':'' }}">
                 <label for="branch_address" class="col-sm-4 col-form-label">@lang('app.branch_address') <span class="field-required">*</span></label>
                 <div class="col-sm-8">
                     <input type="text" class="form-control" id="branch_address" value="{{ get_option('branch_address') }}" name="branch_address" placeholder="@lang('app.branch_address')">
@@ -142,7 +142,7 @@
                     <input type="text" class="form-control" id="iban" value="{{ get_option('iban') }}" name="iban" placeholder="@lang('app.iban')">
                     {!! $errors->has('iban')? '<p class="help-block">'.$errors->first('iban').'</p>':'' !!}
                 </div>
-            </div>
+            </div> --}}
 
         </div>
 
