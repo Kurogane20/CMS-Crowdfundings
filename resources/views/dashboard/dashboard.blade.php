@@ -69,7 +69,7 @@ $auth_user = \Auth::user();
 
         <div class="row">
             <div class="col-lg-3 col-md-6 p-2">
-                <div class="card bg-secondary">
+                <div class="card bg-info">
                     <div class="card-header">
                         <div class="row">
                             <div class="col-xs-12">
@@ -99,6 +99,19 @@ $auth_user = \Auth::user();
                     <div class="card-header">
                         <div class="row">
                             <div class="col-xs-12">
+                                <div class="huge">{!! get_amount($pending_payment_amount) !!}</div>
+                                <div>@lang('app.pending_payment_amount')</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{-- <div class="col-lg-3 col-md-6 p-2">
+                <div class="card bg-info">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-xs-12">
                                 <div class="huge">
                                     @php
                                     $campaign_owner_comission = get_option('campaign_owner_commission');
@@ -110,9 +123,9 @@ $auth_user = \Auth::user();
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
-            <div class="col-lg-3 col-md-6 p-2">
+            {{-- <div class="col-lg-3 col-md-6 p-2">
                 <div class="card bg-info">
                     <div class="card-header">
                         <div class="row">
@@ -123,14 +136,14 @@ $auth_user = \Auth::user();
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
         </div>
 
         <div class="row">
 
 
-            <div class="col-lg-3 col-md-6 p-2">
+            {{-- <div class="col-lg-3 col-md-6 p-2">
                 <div class="card bg-secondary">
                     <div class="card-header">
                         <div class="row">
@@ -147,10 +160,10 @@ $auth_user = \Auth::user();
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
-            <div class="col-lg-3 col-md-6 p-2">
-                <div class="card bg-secondary">
+            {{-- <div class="col-lg-3 col-md-6 p-2">
+                <div class="card bg-info">
                     <div class="card-header">
                         <div class="row">
                             <div class="col-xs-12">
@@ -162,20 +175,9 @@ $auth_user = \Auth::user();
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
-            <div class="col-lg-3 col-md-6 p-2">
-                <div class="card bg-info">
-                    <div class="card-header">
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <div class="huge">{!! get_amount($pending_payment_amount) !!}</div>
-                                <div>@lang('app.pending_payment_amount')</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
 
         </div>
 
@@ -271,3 +273,11 @@ $auth_user = \Auth::user();
     </div>
 
 @endsection
+
+<style>
+    .bg{
+        background-color: rgb(129, 127, 255);
+        color: #000;
+        background: #000;
+    }
+</style>

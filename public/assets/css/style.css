@@ -775,3 +775,8 @@ overwriting bootstrap
     padding: 100px 0;
     background: #ededed;
 }
+
+.bg-dark {
+    background-color: blue;
+}
+
