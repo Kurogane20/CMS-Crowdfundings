@@ -13,7 +13,7 @@
 	    <div class="dashboard-wrap">
 	        <div class="container-fluid">
 	            <div id="wrapper" class="row flex-nowrap">
-       				<div class="col-auto col-sm-2 px-sm-2 px-0 bg-dark">
+       				<div class="col-auto col-sm-2 px-sm-2 px-0 bg">
 
 	                	@include('layouts.dashboard.partials.menu')
 	            	</div>
@@ -60,3 +60,10 @@
     </script>
 	@yield('page-js')
 @endsection
+
+<style>
+	.bg {
+    background-color: rgb(5, 99, 94);
+}
+
+</style>
