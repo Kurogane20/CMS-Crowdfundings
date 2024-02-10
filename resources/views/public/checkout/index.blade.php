@@ -22,13 +22,17 @@
                         </div>
 
                         <div class="row mb-3 {{ $errors->has('full_name')? 'is-invalid':'' }}">
-                            <div class="col-sm-6">
+                            <div class="col-sm-4">
                                 <input type="text" class="form-control" id="full_name" value="@if(Auth::check()){{auth()->user()->name}}@else{{ old('full_name') }}@endif" name="full_name" placeholder="@lang('app.full_name')">
                                 {!! $errors->has('full_name')? '<p class="help-block">'.$errors->first('full_name').'</p>':'' !!}
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-4">
                                 <input type="text" class="form-control" id="email" value="@if(Auth::check()){{auth()->user()->email}}@else{{ old('email') }}@endif" name="email" placeholder="@lang('app.email')">
                                 {!! $errors->has('email')? '<p class="help-block">'.$errors->first('email').'</p>':'' !!}
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" id="phone" value="@if(Auth::check()){{auth()->user()->phone}}@else{{ old('phone') }}@endif" name="phone" placeholder="@lang('app.phone')">
+                                {!! $errors->has('phone')? '<p class="help-block">'.$errors->first('phone').'</p>':'' !!}
                             </div>
                         </div>
 
@@ -131,6 +135,20 @@
                 $(this).closest('form').find($('[name="amount"]')).val($(this).data('value'));
             });
         });
+
+        $(document).ready(function() {
+            $('form').submit(function(event) {
+                var fullName = $('#full_name').val().trim();
+                var email = $('#email').val().trim();
+                var phone = $('#phone').val().trim();
+
+                if (fullName === '' || email === '' || phone === '') {
+                    event.preventDefault(); // Menghentikan pengiriman formulir jika ada kolom yang kosong
+                    alert('Please fill in all required fields.');
+                }
+            });
+        });
+
     </script>
 
 @endsection

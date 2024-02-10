@@ -16,7 +16,7 @@
     @endif
 
     <div class="campaign-progress-info">
-        <h4>{!! get_amount($campaign->total_raised()) !!} <small>@lang('app.raised_of') {!! get_amount($campaign->goal) !!} @lang('app.goal')</small></h4>
+        <h4>{!! get_amount($campaign->total_raised()) !!} <small>dari target {!! get_amount($campaign->goal) !!} @lang('app.goal')</small></h4>
 	
         <div class="progress">
             @php
@@ -28,8 +28,8 @@
         </div>
 
         <ul>
-            <li><strong>{{$campaign->days_left()}}</strong> @lang('app.days_left')</li>
-            <li><strong>{{$campaign->total_payments}}</strong> @lang('app.backers')</li>
+            <li><strong>{{$campaign->days_left()}}</strong> hari lagi</li>
+            <li><strong>{{$campaign->total_payments}}</strong> Donatur</li>
         </ul>
     </div>
 
@@ -67,7 +67,7 @@
 
     <div class="donate_form">
 
-        <h2>@lang('app.donate')</h2>
+        <h2>Doansi</h2>
 
         @if( ! $is_ended)
 
@@ -90,7 +90,7 @@
                 @endif
 
                 <div class="donate-form-button">
-                    <button type="submit" class="btn btn-filled btn-block btn-lg">@lang('app.donate')</button>
+                    <button type="submit" class="btn btn-filled">Donasi Sekarang</button>
                 </div>
             </form>
 

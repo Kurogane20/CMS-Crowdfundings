@@ -18,10 +18,10 @@
                     $faqs_count = $campaign->faqs->count();
                     @endphp
                     <ul>
-                        <li><a href="{{route('campaign_single', [$campaign->id, $campaign->slug])}}"> @lang('app.campaign_home') </a> </li>
-                        <li><a href="{{route('campaign_backers', [$campaign->id, $campaign->slug])}}"> @lang('app.backers') ({{$backers_count}}) </a> </li>
+                        <li><a href="{{route('campaign_single', [$campaign->id, $campaign->slug])}}">Detail </a> </li>
+                        <li><a href="{{route('campaign_backers', [$campaign->id, $campaign->slug])}}"> Donatur ({{$backers_count}}) </a> </li>
                         <li>
-                            <a href="{{route('campaign_updates', [$campaign->id, $campaign->slug])}}"> @lang('app.updates')
+                            <a href="{{route('campaign_updates', [$campaign->id, $campaign->slug])}}"> Kabar Terbaru
                                 @if($updates_count > 0) ({{$updates_count}}) @endif
                             </a> </li>
                         <li>

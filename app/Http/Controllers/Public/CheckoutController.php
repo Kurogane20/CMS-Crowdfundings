@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\BankTransferReceived;
+use App\Jobs\SendBankTransferReceivedEmail;
 
 class CheckoutController extends Controller
 {
@@ -48,6 +49,7 @@ class CheckoutController extends Controller
      * Checkout page
      */
     public function checkout(){
+       
         $title = trans('app.checkout');
 
         if ( ! session('cart')){
@@ -68,6 +70,7 @@ class CheckoutController extends Controller
     }
 
     public function checkoutPost(Request $request){
+        
         $title = trans('app.checkout');
 
         if ( ! session('cart')){
@@ -330,8 +333,9 @@ class CheckoutController extends Controller
     public function paymentBankTransferReceive(Request $request){
         $rules = [
             // 'bank_swift_code'   => 'required',
-            'account_number'    => 'required',
-            // 'branch_name'       => 'required',
+            'account_number'    => 'required',            
+            // 'amount'            => 'required'
+            'branch_name'       => 'required',
             // 'branch_address'    => 'required',
             // 'account_name'      => 'required',
         ];
@@ -372,6 +376,8 @@ class CheckoutController extends Controller
         $payments_data = [
             'name' => session('cart.full_name'),
             'email' => session('cart.email'),
+            'phone' => session('cart.phone'),
+            
 
             'user_id'               => $user_id,
             'campaign_id'           => $campaign->id,
@@ -397,10 +403,12 @@ class CheckoutController extends Controller
         $request->session()->forget('cart');
 
         //send email notification
-        Mail::to($payments_data['email'])->send(new BankTransferReceived($payments_data));
+        // Mail::to($payments_data['email'])->send(new BankTransferReceived($payments_data));
+        // Dispatch the job to send the email asynchronously
+        SendBankTransferReceivedEmail::dispatch($payments_data);
 
         return ['success'=>1, 'msg'=> trans('app.payment_received_msg'), 'response' => $this->payment_success_html()];
-
+        
     }
 
 

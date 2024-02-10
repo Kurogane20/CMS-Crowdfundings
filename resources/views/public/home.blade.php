@@ -12,7 +12,10 @@
 
                     <div class="jumbotron-button-wrap">
                         <a class="btn btn-lg-outline" href="{{route('browse_categories')}}">@lang('app.support_campaigns')</a>
-                        <a class="btn btn-lg-filled" href="{{route('start_campaign')}}">@lang('app.start_crowdfunding')</a>
+                        {{-- <a class="btn btn-lg-filled" href="{{route('start_campaign')}}">@lang('app.start_crowdfunding')</a> --}}
+                        <?php if (auth()->check() && auth()->user()->user_type == 'admin'): ?>
+                            <a class="btn btn-lg-filled" href="{{ route('start_campaign') }}">@lang('app.start_a_campaign')</a>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
