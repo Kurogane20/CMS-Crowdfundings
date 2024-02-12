@@ -135,7 +135,10 @@ class Campaign extends Model
         return $query->where('status', 0);
     }
     public function scopeExpired($query){
-        return $query->whereDate('end_date', '<', Carbon::today()->toDateString());
+        return $query->where(function ($query) {
+        $query->where('end_date', '<', Carbon::today()->toDateString())
+              ->orWhereColumn('total_funded', '>=', 'goal');
+    });
     }
     public function scopeFunded($query){
         return $query->where('is_funded', 1);

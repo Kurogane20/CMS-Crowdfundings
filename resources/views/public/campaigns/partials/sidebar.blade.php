@@ -67,7 +67,7 @@
 
     <div class="donate_form">
 
-        <h2>Doansi</h2>
+        <h2>Donasi</h2>
 
         @if( ! $is_ended)
 

@@ -86,11 +86,11 @@
                         <span class="ms-1 d-none d-sm-inline">@lang('app.users')</span>
                     </a>
                 </li>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a href="{{route('withdrawal_requests')}}" class="nav-link text-white align-middle px-0">
                         <i class="fa fa-balance-scale"></i> <span class="ms-1 d-none d-sm-inline">@lang('app.withdrawal_requests')</span>
                     </a>
-                </li>
+                </li> --}}
             @endif
 
             <li class="nav-item">
@@ -98,11 +98,11 @@
                     <i class="fa fa-money"></i> <span class="ms-1 d-none d-sm-inline">@lang('app.payments')</span>
                 </a>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a href="{{route('withdraw')}}" class="nav-link text-white align-middle px-0">
                     <i class="fa fa-credit-card"></i> <span class="ms-1 d-none d-sm-inline">@lang('app.withdraw')</span>
                 </a>
-            </li>
+            </li> --}}
         </ul>
         <hr>
         <div class="dropdown pb-4">
