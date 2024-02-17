@@ -3,24 +3,89 @@
 
 @section('content')
 
-    <div class="main-banner">
+    <div class="main-slider" style="padding-top: 70px">
         <div class="container">
-            <div class="row">
+            <div class="rowslider">
                 <div class="col-md-12 carousel">
-                    <h1 class="section-title">{!! get_option('banner_main_header') !!}</h1>
-                    <p class="jumbotron-sub-text">{!! get_option('banner_sub_header') !!}</p>
+                    <!-- Initialize your slider here using JavaScript or a slider library -->
+                    <div id="campaignSlider" class="carousel slide" data-ride="carousel" data-in>
+                        <div class="carousel-inner">
+                            @foreach($new_campaigns as $index => $nc)
+                                <div class="carousel-item {{$index == 0 ? 'active' : ''}}">
+                                    <a href="{{route('campaign_single', [$nc->id, $nc->slug])}}"><img src="{{ $nc->feature_img_url(true) }}" class="d-block w-100" alt="Campaign Image">
+                                    {{-- <div class="carousel-caption d-none d-md-block">
+                                        <h5 style="font-size: 50px" style="font-weight: 100">{{ $nc->title }}</h5>
+                                    </div> --}}
+                                </div>
+                            @endforeach
+                        </div>
+                        <a class="carousel-control-prev" href="#campaignSlider" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#campaignSlider" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
 
-                    <div class="jumbotron-button-wrap">
-                        <a class="btn btn-lg-outline" href="{{route('browse_categories')}}">@lang('app.support_campaigns')</a>
-                        {{-- <a class="btn btn-lg-filled" href="{{route('start_campaign')}}">@lang('app.start_crowdfunding')</a> --}}
-                        <?php if (auth()->check() && auth()->user()->user_type == 'admin'): ?>
-                            <a class="btn btn-lg-filled" href="{{ route('start_campaign') }}">@lang('app.start_a_campaign')</a>
-                        <?php endif; ?>
+                        <ol class="carousel-indicators">
+                            @foreach($new_campaigns as $index => $nc)
+                                <li data-target="#campaignSlider" data-slide-to="{{$index}}" class="{{$index == 0 ? 'active' : ''}}"></li>
+                            @endforeach
+                        </ol>
                     </div>
+
+                    <!-- Toastr integration -->
+                    <button id="showToastBtn" style="display: none;">Show Toast</button>
                 </div>
             </div>
         </div>
     </div>
+
+    <section class="home-campaign section-bg-white" >
+        <div class="container" style="margin-bottom: 0%">
+            <div class="row" style="margin-bottom: 0%">
+                <div class="col-md-12">
+                    <h2 style="text-align: center; ">{!! get_option('banner_main_header') !!}</h2>
+                    <p class="jumbotron-sub-text" style="margin-bottom: 0%">{!! get_option('banner_sub_header') !!}</p>                   
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+    <section class="home-campaign section-bg-white"> <!-- explore categories -->
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="section-title">@lang('app.explore_categories') </h2>
+                </div>
+            </div>
+
+            <div class="row">
+                @foreach($categories as $cat)
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <div class="home-category-box">
+                            <img src="{{ $cat->get_image_url() }}" />
+                            <div class="title">
+                                <a href="{{route('single_category', [$cat->id, $cat->category_slug])}}">{{ $cat->category_name }}</a>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="section-footer">
+                        <a href="{{route('browse_categories')}}" class="section-action-btn">@lang('app.see_all')</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
 
     <section class="home-campaign section-bg-white">
         <div class="container">
@@ -88,39 +153,6 @@
                     </div>
                 </div>
 
-            </div>
-
-        </div>
-    </section>
-
-    <section class="home-campaign section-bg-gray"> <!-- explore categories -->
-        <div class="container">
-
-            <div class="row">
-                <div class="col-md-12">
-                    <h2 class="section-title">@lang('app.explore_categories') </h2>
-                </div>
-            </div>
-
-            <div class="row">
-                @foreach($categories as $cat)
-                    <div class="col-md-3 col-sm-6 col-xs-12">
-                        <div class="home-category-box">
-                            <img src="{{ $cat->get_image_url() }}" />
-                            <div class="title">
-                                <a href="{{route('single_category', [$cat->id, $cat->category_slug])}}">{{ $cat->category_name }}</a>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="section-footer">
-                        <a href="{{route('browse_categories')}}" class="section-action-btn">@lang('app.see_all')</a>
-                    </div>
-                </div>
             </div>
 
         </div>
@@ -259,8 +291,17 @@
 @endsection
 
 @section('page-js')
-
     <script type="text/javascript">
+     
+        $(document).ready(function(){
+            // Initialize slider
+            $('#campaignSlider').carousel();
+
+            // Show toastr notification
+            $('#showToastBtn').on('click', function() {
+                toastr.success('Your message here', 'Notification');
+            });
+        });
 
         $(document).ready(function(){
             $(document).on('click', '.loadMorePagination', function (e) {
@@ -289,6 +330,4 @@
             });
         });
     </script>
-
-
 @endsection

@@ -24,6 +24,7 @@
 	    <!-- main style.css -->
 
         <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
+		{{-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"> --}}
 	    @yield('styles')
         
         @if(get_option('additional_css'))
@@ -47,6 +48,7 @@
 		<!-- Scripts -->
 		<script src="{{ asset('assets/js/jquery-1.11.2.min.js') }}"></script>
 		<script src="{{ asset('assets/plugins/toastr/toastr.min.js') }}"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 		<script>
 		    var toastr_options = {closeButton : true};

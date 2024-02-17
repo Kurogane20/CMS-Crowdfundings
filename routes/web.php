@@ -210,6 +210,8 @@ Route::group(['prefix'=>'dashboard', 'middleware' => ['admin','auth']], function
         Route::get('user_status/{id}/{status}', ['as'=>'user_status', 'uses' => 'Admin\UserController@statusChange']);
         Route::get('edit/{id}', ['as'=>'users_edit', 'uses' => 'Admin\UserController@edit']);
         Route::post('edit/{id}', ['uses' => 'Admin\UserController@update']);
+        Route::post('create', ['as'=>'create_new_user', 'uses' => 'Admin\UserController@store']);
+        
 
         // not yet
         //Route::get('profile/change-avatar/{id}', ['as'=>'change_avatar', 'uses' => 'UserController@changeAvatar']);
