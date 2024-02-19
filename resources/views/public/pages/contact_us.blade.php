@@ -3,7 +3,7 @@
 @section('content')
     <section class="auth-form">
 
-        <div class="container">
+        <div class="container" style="padding-top: 70px">
             <div class="row">
                 <div class="col-md-8 offset-md-2">
                     <div class="card card-default">

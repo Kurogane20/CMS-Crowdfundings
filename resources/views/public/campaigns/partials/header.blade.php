@@ -1,4 +1,4 @@
-<div class="single-campaign-header">
+<div class="single-campaign-header" style="padding-top: 70px">
     <div class="container">
         <div class="row">
             <div class="col-md-12">

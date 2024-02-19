@@ -50,7 +50,7 @@
 <body>
   <div class="container">
     <div class="header">
-      <img src="127.0.0.1:8000/uploads/logo/1707281465gksbj-whatsapp-image-2024-02-07-at-075913-removebg-preview.png" alt="Company Logo">
+      <img src="{{ logo_url() }}" alt="Company Logo">
     </div>
     <div class="content">
       <h1>Payment Notification</h1>
