@@ -18,7 +18,7 @@
                         <div class="home-category-box">
                             <img src="{{ $cat->get_image_url() }}" />
                             <div class="title">
-                                <a href="{{route('single_category', [$cat->id, $cat->category_slug])}}">{{ $cat->category_name }}</a>
+                                <a href="{{route('single_category', [$cat->id, $cat->category_slug])}}"></a>
                             </div>
                         </div>
                     </div>

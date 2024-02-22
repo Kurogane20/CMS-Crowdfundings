@@ -490,12 +490,12 @@ h3.campaign-single-sub-title {
     list-style-type: none;
     margin: 0;
     width: 100%;
-    border: 1px solid #ccc;
+    border: 1px solid #cccccc;
     border-radius: 2px;
     padding: 0;
 }
 .donate-amount-placeholder ul li {
-    font-size: 18px;
+    font-size: 15px;
     line-height: 25px;
     min-width: 25%;
     padding: 0.7em;
@@ -508,7 +508,7 @@ h3.campaign-single-sub-title {
 }
 .donate-form-button button{
     background-image: none;
-    border-radius: 0;
+    border-radius: 10px;
 }
 .campaign-decription {
     font-size: 15px;

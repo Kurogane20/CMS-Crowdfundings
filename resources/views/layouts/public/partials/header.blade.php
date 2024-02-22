@@ -37,12 +37,13 @@
 
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ms-auto">
-                    
-                    <li class="nav-item">
-                        <a href="{{route('start_campaign')}}" class=" btn btn-filled">
-                            @lang('app.start_a_campaign')
-                        </a>
-                    </li>
+                    <?php if (auth()->check() && auth()->user()->user_type == 'admin'): ?>
+                        <li class="nav-item">
+                            <a href="{{route('start_campaign')}}" class=" btn btn-filled">
+                                @lang('app.start_a_campaign')
+                            </a>
+                        </li>
+                    <?php endif; ?>
                     <!-- Authentication Links -->
                     @guest
                         @if (Route::has('login'))

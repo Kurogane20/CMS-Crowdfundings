@@ -59,7 +59,7 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <h2 class="section-title">@lang('app.explore_categories') </h2>
+                    <h2 class="section-title">Kategori</h2>
                 </div>
             </div>
 
@@ -69,7 +69,7 @@
                         <div class="home-category-box">
                             <img src="{{ $cat->get_image_url() }}" />
                             <div class="title">
-                                <a href="{{route('single_category', [$cat->id, $cat->category_slug])}}">{{ $cat->category_name }}</a>
+                                <a href="{{route('single_category', [$cat->id, $cat->category_slug])}}"></a>
                             </div>
                         </div>
                     </div>
@@ -128,7 +128,7 @@
                 <div class="col-md-3 col-sm-6 col-xs-12">
                     <div class="why-choose-us-box">
                         <div class="icon">
-                            <i class="fa fa-thumbs-up"></i>
+                            <i class="fa fa-instagram"></i>
                         </div>
                         <div class="title">
                             <h4>@lang('app.easy')</h4>
@@ -164,7 +164,7 @@
 
                 <div class="row">
                     <div class="col-md-12">
-                        <h2 class="section-title"> @lang('app.new_campaigns') </h2>
+                        <h2 class="section-title"> Ayo Donasi </h2>
                     </div>
                 </div>
 
