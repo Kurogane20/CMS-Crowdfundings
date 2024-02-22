@@ -139,13 +139,13 @@ h2.section-title::after{
 Home category box
 --------------------------------------------------------------*/
 .home-category-box {
-    height: 150px;
+    max-height: 150px;
     overflow: hidden;
     position: relative;
     margin-bottom: 20px;
 }
 .home-category-box img {
-    height: auto;
+    max-height: 150px;
     width: 100%;
     position: relative;
     vertical-align: middle;
