@@ -46,7 +46,8 @@
         <div class="container" style="margin-bottom: 0%">
             <div class="row" style="margin-bottom: 0%">
                 <div class="col-md-12">
-                    <h2 style="text-align: center; ">{!! get_option('banner_main_header') !!}</h2>
+                    <h2 style="text-align: center; font-weight:bold; ">{!! get_option('banner_main_header') !!}</h2>
+                    <p class="jumbotron-sub-text" style="margin-bottom: 0%">لَنْ تَنَالُوا الْبِرَّ حَتّٰى تُنْفِقُوْا مِمَّا تُحِبُّوْنَ ۗوَمَا تُنْفِقُوْا مِنْ شَيْءٍ فَاِنَّ اللّٰهَ بِهٖ عَلِيْمٌ ٩٢</p>
                     <p class="jumbotron-sub-text" style="margin-bottom: 0%">{!! get_option('banner_sub_header') !!}</p>                   
                 </div>
             </div>
@@ -59,13 +60,13 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <h2 class="section-title">Kategori</h2>
+                    <h2 class="section-title">Mari berbagi dengan program kami</h2>
                 </div>
             </div>
 
             <div class="row">
                 @foreach($categories as $cat)
-                    <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="col-md-3 col-sm-6 col-xs-12" style="min-width: 370px">
                         <div class="home-category-box">
                             <img src="{{ $cat->get_image_url() }}" />
                             <div class="title">
@@ -76,13 +77,13 @@
                 @endforeach
             </div>
 
-            <div class="row">
+            {{-- <div class="row">
                 <div class="col-md-12">
                     <div class="section-footer">
                         <a href="{{route('browse_categories')}}" class="section-action-btn">@lang('app.see_all')</a>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
         </div>
     </section>

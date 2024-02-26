@@ -13,17 +13,17 @@
                     <div class="checkout-wrap">
 
                         <div class="contributing-to">
-                            <p class="contributing-to-name"><strong> @lang('app.you_are_contributing_to') {{$campaign->user->name}}</strong></p>
+                            <p class="contributing-to-name"><strong>Kamu akan berdonasi untuk campaign:</strong></p>
                             <h3>{{$campaign->title}}</h3>
 
-                            @if( ! Auth::check())
+                            {{-- @if( ! Auth::check())
                                 <p class="guest_checkout_text"><strong> @lang('app.guest_checkout') <span class="text-muted">@lang('app.or')</span> <a href="{{route('login')}}">@lang('app.log_in')</a> </strong></p>
-                            @endif
+                            @endif --}}
                         </div>
 
                         <div class="row mb-3 {{ $errors->has('full_name')? 'is-invalid':'' }}">
                             <div class="col-sm-4">
-                                <input type="text" class="form-control" id="full_name" value="@if(Auth::check()){{auth()->user()->name}}@else{{ old('full_name') }}@endif" name="full_name" placeholder="@lang('app.full_name')">
+                                <input type="text" class="form-control" id="full_name" value="@if(Auth::check()){{auth()->user()->name}}@else{{ old('full_name') }}@endif" name="full_name" placeholder="Nama Donatur">
                                 {!! $errors->has('full_name')? '<p class="help-block">'.$errors->first('full_name').'</p>':'' !!}
                             </div>
                             <div class="col-sm-4">
@@ -31,7 +31,7 @@
                                 {!! $errors->has('email')? '<p class="help-block">'.$errors->first('email').'</p>':'' !!}
                             </div>
                             <div class="col-sm-4">
-                                <input type="text" class="form-control" id="phone" value="@if(Auth::check()){{auth()->user()->phone}}@else{{ old('phone') }}@endif" name="phone" placeholder="@lang('app.phone')">
+                                <input type="text" class="form-control" id="phone" value="@if(Auth::check()){{auth()->user()->phone}}@else{{ old('phone') }}@endif" name="phone" placeholder="No. Telepon">
                                 {!! $errors->has('phone')? '<p class="help-block">'.$errors->first('phone').'</p>':'' !!}
                             </div>
                         </div>
@@ -46,11 +46,11 @@
                                 <div class="name_display_wrap">
 
                                     <label>
-                                        <input type="radio" name="contributor_name_display" value="full_name" checked="checked" > @lang('app.full_name')
+                                        <input type="radio" name="contributor_name_display" value="full_name" checked="checked" > Nama Lengkap
                                     </label>
 
                                     <label>
-                                        <input type="radio" name="contributor_name_display" value="anonymous"> @lang('app.anonymous')
+                                        <input type="radio" name="contributor_name_display" value="anonymous"> Anonim
                                     </label>
 
                                 </div>

@@ -140,6 +140,7 @@ Home category box
 --------------------------------------------------------------*/
 .home-category-box {
     max-height: 150px;
+    /* width: 351px; */
     overflow: hidden;
     position: relative;
     margin-bottom: 20px;
