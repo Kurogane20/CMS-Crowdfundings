@@ -66,7 +66,7 @@
 
             <div class="row">
                 @foreach($categories as $cat)
-                    <div class="col-md-3 col-sm-6 col-xs-12" style="min-width: 370px">
+                    <div class="col-md-3 col-sm-6 col-xs-12" style="min-width: 380px">
                         <div class="home-category-box">
                             <img src="{{ $cat->get_image_url() }}" />
                             <div class="title">
