@@ -26,7 +26,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-3" style="margin-bottom: 20px">
+                <div class="col-md-3" style="margin-bottom: 20px; width: 280px;">
                     <div class="footer-widget">
                         <h4 class="footer-widget-title">Hubungi Kami</h4>
                         <ul class="contact-info">
@@ -35,19 +35,18 @@
                     </div>
                 </div>
 
-                <div class="col-md-2" style="margin-bottom: 20px">
+                <div class="col-md-3" style="margin-bottom: 20px; width: 280px;">
                     <div class="footer-widget">
                         <h4 class="footer-widget-title">Rekening Donasi</h4>                        
-                        <li style="list-style-type: circle">BSI 12345678</li>                            
-                        <li style="list-style-type: circle">BCA 12345678</li>                            
-                        <li style="list-style-type: circle">Mandiri 12345678</li>                            
-                        <li style="list-style-type: circle">BRI 12345678</li>                            
+                        <li style="list-style-type: circle">Bank Syariah Indonesia 7265412647 </li>                            
+                        <li style="list-style-type: circle">Bank Muamalat Indonesia 3320800800</li>                            
+                                              
                                                         
                         
                     </div>
                 </div>
 
-                <div class="col-md-3" style="width: 200px; margin-bottom:20px">
+                <div class="col-md-3" style="width: 170px; margin-bottom:20px">
                     <div class="footer-widget">
                         <h4 class="footer-widget-title">@lang('app.campaigns') </h4>
                         <ul class="contact-info">
