@@ -33,14 +33,14 @@ class CreatePaymentsTable extends Migration
             // $table->string('card_exp_month')->nullable();
             // $table->string('card_exp_year')->nullable();
 
-            // $table->string('client_ip')->nullable();
-            // $table->string('charge_id_or_token')->nullable();
-            // $table->string('payer_email')->nullable();
-            // $table->string('description')->nullable();
-            // $table->string('local_transaction_id')->nullable();
-            // //payment created column will be use by gateway
-            // $table->integer('payment_created')->nullable();
-            // $table->string('contributor_name_display', 50)->nullable();
+            $table->string('client_ip')->nullable();
+            $table->string('charge_id_or_token')->nullable();
+            $table->string('payer_email')->nullable();
+            $table->string('description')->nullable();
+            $table->string('local_transaction_id')->nullable();
+            //payment created column will be use by gateway
+            $table->integer('payment_created')->nullable();
+            $table->string('contributor_name_display', 50)->nullable();
 
             //Bank Payment Options
             $table->string('bank_swift_code')->nullable();

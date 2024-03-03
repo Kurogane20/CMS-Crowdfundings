@@ -88,10 +88,10 @@
             <tr>
                 <th colspan="2"><h4>@lang('app.bank_transfer_information')</h4></th>
             </tr>
-            <tr>
+            {{-- <tr>
                 <th>@lang('app.bank_swift_code')</th>
                 <td>{{$payment->bank_swift_code}}</td>
-            </tr>
+            </tr> --}}
 
             <tr>
                 <th>@lang('app.account_number')</th>
@@ -103,7 +103,7 @@
                 <td>{{$payment->branch_name}}</td>
             </tr>
 
-            <tr>
+            {{-- <tr>
                 <th>@lang('app.branch_address')</th>
                 <td>{{$payment->branch_address}}</td>
             </tr>
@@ -116,7 +116,7 @@
             <tr>
                 <th>@lang('app.iban')</th>
                 <td>{{$payment->iban}}</td>
-            </tr>
+            </tr> --}}
         @endif
 
         <tr>

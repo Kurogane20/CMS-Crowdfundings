@@ -50,7 +50,7 @@
 <body>
   <div class="container">
     <div class="header">
-      <img src="{{ logo_url() }}" alt="Company Logo">
+      <img class="main-logo" src="{{ logo_url() }}" alt="Company Logo" />
     </div>
     <div class="content">
       <h1>Payment Notification</h1>

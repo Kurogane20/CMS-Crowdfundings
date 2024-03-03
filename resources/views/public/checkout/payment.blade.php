@@ -68,17 +68,17 @@
                                             
 
                                             <div class="row mb-3 {{ $errors->has('account_number')? 'is-invalid':'' }}">
-                                                <label for="account_number" class="col-sm-4 col-form-label">@lang('app.account_number') <span class="field-required">*</span></label>
+                                                <label for="account_number" class="col-sm-4 col-form-label">Nomor Rekening<span class="field-required">*</span></label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" class="form-control" id="account_number" value="{{ old('account_number') }}" name="account_number" placeholder="@lang('app.account_number')">
+                                                    <input type="text" class="form-control" id="account_number" value="{{ old('account_number') }}" name="account_number" placeholder="Nomor Rekening">
                                                     {!! $errors->has('account_number')? '<p class="help-block">'.$errors->first('account_number').'</p>':'' !!}
                                                 </div>
                                             </div>
 
                                             <div class="row mb-3 {{ $errors->has('branch_name')? 'is-invalid':'' }}">
-                                                <label for="branch_name" class="col-sm-4 col-form-label">@lang('app.branch_name') <span class="field-required">*</span></label>
+                                                <label for="branch_name" class="col-sm-4 col-form-label">Nama Bank<span class="field-required">*</span></label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" class="form-control" id="branch_name" value="{{ old('branch_name') }}" name="branch_name" placeholder="@lang('app.branch_name')">
+                                                    <input type="text" class="form-control" id="branch_name" value="{{ old('branch_name') }}" name="branch_name" placeholder="Nama Bank">
                                                     {!! $errors->has('branch_name')? '<p class="help-block">'.$errors->first('branch_name').'</p>':'' !!}
                                                 </div>
                                             </div>

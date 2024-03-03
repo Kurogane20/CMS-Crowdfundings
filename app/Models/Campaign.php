@@ -162,9 +162,9 @@ class Campaign extends Model
     public function feature_img_url($full_size = false){
         if ($this->feature_image){
             if ($full_size){
-                return '/storage/uploads/campaigns/large/'.$this->feature_image;
+                return url('/storage/uploads/campaigns/large/'.$this->feature_image);
             }
-            return '/storage/uploads/campaigns/thumb/'.$this->feature_image;
+            return url('/storage/uploads/campaigns/thumb/'.$this->feature_image);
         }else{
             return asset('/assets/images/campaign-placeholder.jpg');
         }
