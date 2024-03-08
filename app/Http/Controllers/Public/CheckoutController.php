@@ -121,13 +121,10 @@ class CheckoutController extends Controller
     }
 
     public function paymentBankTransferReceive(Request $request){
-        $rules = [
-            // 'bank_swift_code'   => 'required',
-            'account_number'    => 'required',            
-            // 'amount'            => 'required'
-            'branch_name'       => 'required',
-            // 'branch_address'    => 'required',
-            // 'account_name'      => 'required',
+        $rules = [          
+            // 'account_number'    => 'required',            
+            // 'branch_name'       => 'required',
+            'bukti_pembayaran' => 'required',
         ];
         $this->validate($request, $rules);
 
@@ -154,14 +151,39 @@ class CheckoutController extends Controller
             $user_id = Auth::user()->id;
         }
         //Create payment in database
-
-
         $transaction_id = 'tran_'.time().str_random(6);
         // get unique recharge transaction id
         while( ( Payment::whereLocalTransactionId($transaction_id)->count() ) > 0) {
             $transaction_id = 'reid'.time().str_random(5);
         }
-        $transaction_id = strtoupper($transaction_id);
+        $transaction_id = strtoupper($transaction_id); 
+
+        $image_name = '';
+        if ($request->hasFile('bukti_pembayaran')){
+            $image = $request->file('bukti_pembayaran');
+            $valid_extensions = ['jpg','jpeg','png'];
+            if ( ! in_array(strtolower($image->getClientOriginalExtension()), $valid_extensions) ){
+                return redirect()->back()->withInput($request->input())->with('error', 'Only .jpg, .jpeg and .png is allowed extension') ;
+            }
+
+
+            $upload_dir = './storage/uploads/bukti_pembayaran/';
+            if ( ! file_exists($upload_dir)){
+                mkdir($upload_dir, 0777, true);
+            }
+
+            $file_base_name = str_replace('.'.$image->getClientOriginalExtension(), '', $image->getClientOriginalName());
+            $resized = Image::make($image)->resize(300, 200);
+
+            $image_name = strtolower(time().str_random(5).'-'.str_slug($file_base_name)).'.' . $image->getClientOriginalExtension();
+            $imageFileName = $upload_dir.$image_name;
+
+            try{
+                $resized->save($imageFileName);
+            } catch (\Exception $e){
+                return $e->getMessage();
+            }
+        }
 
         $payments_data = [
             'name' => session('cart.full_name'),
@@ -187,24 +209,77 @@ class CheckoutController extends Controller
             'branch_address'    => $request->branch_address,
             'account_name'      => $request->account_name,
             'iban'              => $request->iban,
+            'bukti_pembayaran'  => $image_name            
         ];
+        
+         
         //Create payment and clear it from session
         $created_payment = Payment::create($payments_data);
         $request->session()->forget('cart');
+        // dd($path);
 
-        //send email notification
-        // Mail::to($payments_data['email'])->send(new BankTransferReceived($payments_data));
-        // Dispatch the job to send the email asynchronously
+
+
+        //send email notification        
         SendBankTransferReceivedEmail::dispatch($payments_data);
         // Kirim notifikasi WhatsApp
         $phone =$payments_data['phone'];
         $donasi = $campaign->title;
-        $message = 'Assalamualaikum Warahmatullahi Wabarakatuh, Donasi anda untuk'. ' '.$donasi . ' Sebesar'. ' ' .'Rp'. $amount . ' ' . ' telah kami terima.';
+        $message = 'Assalamualaikum Warahmatullahi Wabarakatuh, Donasi anda untuk'. ' '.$donasi . ' Sebesar'. ' ' .'Rp'. number_format($amount, 0, ',', '.') . ' ' . ' telah kami terima.';
         SendWhatsAppNotification::dispatch($phone, $message);
-
-        return ['success'=>1, 'msg'=> trans('app.payment_received_msg'), 'response' => $this->payment_success_html()];  
+        return ['success'=>1, 'msg'=> trans('app.payment_received_msg'), 'response' => $this->payment_success_html()];
         
     }
 
+    public function mandiriPaymentPage(Request $request){
+        // Lakukan logika yang diperlukan untuk halaman pembayaran Mandiri
+        // Contoh: Mendapatkan data kampanye atau reward yang dibeli
+        // Kemudian kirimkan data tersebut ke view untuk ditampilkan
+        $title = trans('app.checkout');
 
+        if ( ! session('cart')){
+            return view('public.checkout.empty', compact('title'));
+        }
+
+        $cart = session('cart');
+        $input = array_except($request->input(), '_token');
+        session(['cart' => array_merge($cart, $input)]);
+        $amount = 0;
+        $name = '';
+        if(session('cart.cart_type') == 'reward'){
+            $reward = Reward::find(session('cart.reward_id'));
+            $campaign = Campaign::find($reward->campaign_id);
+        }elseif (session('cart.cart_type') == 'donation'){
+            $campaign = Campaign::find(session('cart.campaign_id'));
+            $amount = session('cart.amount');
+            $name = session('cart.full_name');
+        }
+        return view('public.checkout.bsi', compact('title', 'campaign','amount', 'name'));
+    }
+
+    public function muamalatPaymentPage(Request $request){
+        // Lakukan logika yang diperlukan untuk halaman pembayaran Muamalat
+        // Contoh: Mendapatkan data kampanye atau reward yang dibeli
+        // Kemudian kirimkan data tersebut ke view untuk ditampilkan
+        $title = trans('app.checkout');
+
+        if ( ! session('cart')){
+            return view('public.checkout.empty', compact('title'));
+        }
+
+        $cart = session('cart');
+        $input = array_except($request->input(), '_token');
+        session(['cart' => array_merge($cart, $input)]);
+        $amount = 0;
+        $name ='';
+        if(session('cart.cart_type') == 'reward'){
+            $reward = Reward::find(session('cart.reward_id'));
+            $campaign = Campaign::find($reward->campaign_id);
+        }elseif (session('cart.cart_type') == 'donation'){
+            $campaign = Campaign::find(session('cart.campaign_id'));
+            $amount = session('cart.amount');
+            $name = session('cart.full_name');
+        }
+        return view('public.checkout.muamalat', compact('title', 'campaign','amount','name'));
+    }
 }

@@ -50,7 +50,7 @@
 <body>
   <div class="container">
     <div class="header">
-      <img class="main-logo" src="{{ logo_url() }}" alt="Company Logo" />
+      <img class="main-logo" src="https://jadimanfaat.org/uploads/logo/1707337747ltdeq-favicon.png" alt="Company Logo" />
     </div>
     <div class="content">
       <h1>Payment Notification</h1>

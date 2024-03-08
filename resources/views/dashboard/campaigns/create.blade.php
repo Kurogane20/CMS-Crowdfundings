@@ -98,7 +98,7 @@
                     </div>
                 </div>
 
-                <div class="row mb-3{{ $errors->has('amount_prefilled')? 'is-invalid':'' }}">
+                {{-- <div class="row mb-3{{ $errors->has('amount_prefilled')? 'is-invalid':'' }}">
                     <label for="amount_prefilled" class="col-sm-4 col-form-label">@lang('app.amount_prefilled')</label>
                     <div class="col-sm-8">
                         <input type="text" class="form-control" id="amount_prefilled" value="{{ old('amount_prefilled') }}" name="amount_prefilled" placeholder="@lang('app.amount_prefilled')">
@@ -106,7 +106,7 @@
                         <p class="text-info"> @lang('app.amount_prefilled_info_text')</p>
 
                     </div>
-                </div>
+                </div> --}}
 
 
                 <div class="row mb-3{{ $errors->has('end_method')? 'is-invalid':'' }}">

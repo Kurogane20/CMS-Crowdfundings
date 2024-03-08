@@ -60,7 +60,7 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <h2 class="section-title">Mari berbagi dengan program kami</h2>
+                    <h2 class="section-title" style="font-weight: bold">Mari Berbagi Dengan Program Kami</h2>
                 </div>
             </div>
 

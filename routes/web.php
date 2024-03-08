@@ -47,6 +47,10 @@ Route::any('add-to-cart/{reward_id?}', ['as' => 'add_to_cart', 'uses' => 'Public
 Route::get('checkout', ['as' => 'checkout', 'uses' => 'Public\CheckoutController@checkout']);
 Route::post('checkout', ['uses' => 'Public\CheckoutController@checkoutPost']);
 Route::post('checkout/bank-transfer', ['as' => 'bank_transfer_submit', 'uses' => 'Public\CheckoutController@paymentBankTransferReceive']);
+Route::get('checkout/bsi-payment', ['as' => 'bsi_payment', 'uses' => 'Public\CheckoutController@mandiriPaymentPage']);
+Route::get('checkout/muamalat-payment', ['as' => 'muamalat_payment', 'uses' => 'Public\CheckoutController@muamalatPaymentPage']);
+// Route::get('/bsi-payment', 'CheckoutController@mandiriPaymentPage')->name('bsi_payment_page');
+// Route::get('/muamalat-payment', 'CheckoutController@muamalatPaymentPage')->name('muamalat_payment_page');
 
 // Social Logins
 Route::group(['prefix'=>'login'], function(){

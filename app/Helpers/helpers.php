@@ -253,7 +253,7 @@ function get_amount_raw($amount = 0 ){
         $get_price = (int) $amount;
     }else{
         if ($amount > 0){
-            $get_price = number_format($amount,2);
+            $get_price = number_format($amount);
         }
     }
 
