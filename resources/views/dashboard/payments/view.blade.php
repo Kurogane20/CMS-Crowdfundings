@@ -88,10 +88,11 @@
             <tr>
                 <th colspan="2"><h4>@lang('app.bank_transfer_information')</h4></th>
             </tr>
-            {{-- <tr>
-                <th>@lang('app.bank_swift_code')</th>
-                <td>{{$payment->bank_swift_code}}</td>
-            </tr> --}}
+            
+            <tr>
+                <th>No HP</th>
+                <td>{{$payment->phone}}</td>
+            </tr>
 
             {{-- <tr>
                 <th>@lang('app.account_number')</th>

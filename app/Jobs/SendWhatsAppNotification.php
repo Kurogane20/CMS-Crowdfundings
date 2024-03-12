@@ -37,7 +37,7 @@ class SendWhatsAppNotification implements ShouldQueue
     {
         // Kirim notifikasi WhatsApp menggunakan Guzzle HTTP Client
         $client = new Client();
-        $response = $client->post('https://api.watzap.id/v1/send_message', [
+        $response = $client->post('https://api.watzap.id/v1/send_image_url', [
             'json' => [
                 'api_key' => 'BC3KF5E3LIAF7FW3',
                 'number_key' => 'NTDtKsjQkGZbPTcL',
