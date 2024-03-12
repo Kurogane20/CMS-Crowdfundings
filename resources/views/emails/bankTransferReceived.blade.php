@@ -53,11 +53,11 @@
       <img class="main-logo" src="https://jadimanfaat.org/uploads/logo/1707337747ltdeq-favicon.png" alt="Company Logo" />
     </div>
     <div class="content">
-      <h1>Payment Notification</h1>
+      <h1>Ddetail Pemabayaran</h1>
       <div class="details">
         <table>
           <tr>
-            <th>Name:</th>
+            <th>Nama:</th>
             <td>{{ $paymentData['name'] }}</td>
           </tr>
           <tr>
@@ -65,26 +65,17 @@
             <td>{{ $paymentData['email'] }}</td>
           </tr>
           <tr>
-            <th>Amount:</th>
+            <th>Jumlah Donasi:</th>
             <td>{{ $paymentData['amount'] }} {{ $paymentData['currency'] }}</td>
           </tr>
           <tr>
-            <th>Payment Method:</th>
+            <th>Metode Pembayaran:</th>
             <td>{{ $paymentData['payment_method'] }}</td>
           </tr>         
-          <tr>
-            <th>Account Number:</th>
-            <td>{{ $paymentData['account_number'] }}</td>
-          </tr>
-          <tr>
-            <th>Branch Name:</th>
-            <td>{{ $paymentData['branch_name'] }}</td>
-          </tr>
-         
         </table>
       </div>
       <div class="footer">
-        <p>Thank you for your support!</p>
+        <p>Terimakasih telah berdonasi</p>
       </div>
     </div>
   </div>

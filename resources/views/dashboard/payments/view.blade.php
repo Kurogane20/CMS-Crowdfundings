@@ -155,7 +155,7 @@
         </table>
     @endif
     <div id="imageContainer" style="display: none;">
-        <img id="paymentImage" src="" alt="{{ Storage::url($payment->bukti_pembayaran) }}">
+        <img id="paymentImage" src="" alt="{{ Storage::url($payment->bukti_pembayaran) }}" style="width: 500px; height:800px">
     </div>
 
 

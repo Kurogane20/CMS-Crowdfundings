@@ -42,6 +42,7 @@ class SendWhatsAppNotification implements ShouldQueue
                 'api_key' => 'BC3KF5E3LIAF7FW3',
                 'number_key' => 'NTDtKsjQkGZbPTcL',
                 'phone_no' => $this->phone,
+                'url' => 'https://jadimanfaat.org/uploads/logo/1707337747ltdeq-favicon.png',
                 'message' => $this->message
             ]
         ]);
