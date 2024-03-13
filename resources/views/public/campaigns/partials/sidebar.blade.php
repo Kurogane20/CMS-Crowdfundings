@@ -1,6 +1,6 @@
 <div class="single-donate-wrap">
 
-    <h3 class="campaign-single-sub-title">{{$campaign->short_description}}</h3>
+    {{-- <h3 class="campaign-single-sub-title">{{$campaign->short_description}}</h3> --}}
 
     @if($campaign->user)
         <div class="single-author-box">
@@ -16,7 +16,7 @@
     @endif
 
     <div class="campaign-progress-info">
-        <h4>{!! get_amount($campaign->total_raised()) !!} <small>dari target {!! get_amount($campaign->goal) !!} @lang('app.goal')</small></h4>
+        <a>{!! get_amount($campaign->total_raised()) !!} dari target {!! get_amount($campaign->goal) !!} @lang('app.goal')</a>
 	
         <div class="progress">
             @php
