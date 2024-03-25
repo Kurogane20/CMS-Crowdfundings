@@ -53,7 +53,7 @@
       <img class="main-logo" src="https://jadimanfaat.org/uploads/logo/1707337747ltdeq-favicon.png" alt="Company Logo" />
     </div>
     <div class="content">
-      <h1>Ddetail Pemabayaran</h1>
+      <h1>Kami Telah Menerima Donasi Dari :</h1>
       <div class="details">
         <table>
           <tr>
@@ -65,7 +65,7 @@
             <td>{{ $paymentData['email'] }}</td>
           </tr>
           <tr>
-            <th>Jumlah Donasi:</th>
+            <th>Jumlah:</th>
             <td>{{ $paymentData['amount'] }} {{ $paymentData['currency'] }}</td>
           </tr>
           <tr>

@@ -98,10 +98,14 @@ class CheckoutController extends Controller
 
     
     
-    public function payment_success_html(){
+    public function payment_success_html($donasi, $name){
+      
         $html = ' <div class="payment-received">
-                            <h1> <i class="fa fa-check-circle-o"></i> '.trans('app.payment_thank_you').'</h1>
-                            <p>'.trans('app.payment_receive_successfully').'</p>
+                            <h1> <i class="fa fa-check-circle-o"></i> Kami telah menerima donasi '.$donasi.' atas nama '.$name.'</h1>                            
+                            <p>أَجَرَكَ اللهُ فِيْمَا أَعْطَيْتَ، وَجَعَلَهُ لَكَ طَهُوْرًا، وَبَارَكَ لَكَ فِيْمَا أَبْقَيْتَ</p>                            
+                            <p>Semoga Allah memberi pahala apa yang engkau berikan, semoga apa yang engkau berikan menjadi pencuci bagi dirimu, dan semoga Allah memberi keberkahan apa yang tertinggal pada dirimu.
+                            </p> 
+                                                     
                             <a href="'.route('home').'" class="btn btn-filled">'.trans('app.home').'</a>
                         </div>';
         return $html;
@@ -137,6 +141,7 @@ class CheckoutController extends Controller
         $cart = session('cart');
 
         $amount = 0;
+        $name ='';
         if(session('cart.cart_type') == 'reward'){
             $reward = Reward::find(session('cart.reward_id'));
             $amount = $reward->amount;
@@ -144,6 +149,7 @@ class CheckoutController extends Controller
         }elseif (session('cart.cart_type') == 'donation'){
             $campaign = Campaign::find(session('cart.campaign_id'));
             $amount = $cart['amount'];
+            $name = session('cart.full_name');
         }
         $currency = get_option('currency_sign');
         $user_id = null;
@@ -156,8 +162,9 @@ class CheckoutController extends Controller
         while( ( Payment::whereLocalTransactionId($transaction_id)->count() ) > 0) {
             $transaction_id = 'reid'.time().str_random(5);
         }
-        $transaction_id = strtoupper($transaction_id); 
+        $transaction_id = strtoupper($transaction_id);
 
+        //upload bukti pembayaran
         $image_name = '';
         if ($request->hasFile('bukti_pembayaran')){
             $image = $request->file('bukti_pembayaran');
@@ -165,8 +172,6 @@ class CheckoutController extends Controller
             if ( ! in_array(strtolower($image->getClientOriginalExtension()), $valid_extensions) ){
                 return redirect()->back()->withInput($request->input())->with('error', 'Only .jpg, .jpeg and .png is allowed extension') ;
             }
-
-
             $upload_dir = './storage/uploads/bukti_pembayaran/';
             if ( ! file_exists($upload_dir)){
                 mkdir($upload_dir, 0777, true);
@@ -225,9 +230,10 @@ class CheckoutController extends Controller
         // Kirim notifikasi WhatsApp
         $phone =$payments_data['phone'];
         $donasi = $campaign->title;
-        $message = 'Assalamualaikum Warahmatullahi Wabarakatuh, Donasi anda untuk'. ' '.$donasi . ' Sebesar'. ' ' .'Rp'. number_format($amount, 0, ',', '.') . ' ' . ' telah kami terima.';
+        $message = 'Assalamualaikum Warahmatullahi Wabarakatuh'. "\n" .'Kami telah menerima donasi' .$donasi.'atas nama' .$name. ' Sebesar'. ' ' .'Rp'. number_format($amount, 0, ',', '.') . ' ' . ' Terima kasih.'."\n".'أَجَرَكَ اللهُ فِيْمَا أَعْطَيْتَ، وَجَعَلَهُ لَكَ طَهُوْرًا، وَبَارَكَ لَكَ فِيْمَا أَبْقَيْتَ'."\n".'Semoga Allah memberi pahala apa yang engkau berikan, semoga apa yang engkau berikan menjadi pencuci bagi dirimu, dan semoga Allah memberi keberkahan apa yang tertinggal pada dirimu.
+                    '."\n".'jadimanfaat.org';
         SendWhatsAppNotification::dispatch($phone, $message);
-        return ['success'=>1, 'msg'=> trans('app.payment_received_msg'), 'response' => $this->payment_success_html()];
+        return ['success'=>1, 'msg'=> trans('app.payment_received_msg'), 'response' => $this->payment_success_html($donasi, $name)];
         
     }
 
