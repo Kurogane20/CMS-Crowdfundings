@@ -230,7 +230,7 @@ class CheckoutController extends Controller
         // Kirim notifikasi WhatsApp
         $phone =$payments_data['phone'];
         $donasi = $campaign->title;
-        $message = 'Assalamualaikum Warahmatullahi Wabarakatuh'. "\n" .'Kami telah menerima donasi' .$donasi.'atas nama' .$name. ' Sebesar'. ' ' .'Rp'. number_format($amount, 0, ',', '.') . ' ' . ' Terima kasih.'."\n".'أَجَرَكَ اللهُ فِيْمَا أَعْطَيْتَ، وَجَعَلَهُ لَكَ طَهُوْرًا، وَبَارَكَ لَكَ فِيْمَا أَبْقَيْتَ'."\n".'Semoga Allah memberi pahala apa yang engkau berikan, semoga apa yang engkau berikan menjadi pencuci bagi dirimu, dan semoga Allah memberi keberkahan apa yang tertinggal pada dirimu.
+        $message = 'Assalamualaikum Warahmatullahi Wabarakatuh'. "\n" .'Kami telah menerima donasi'.' '.$donasi.' '.'atas nama' .$name.' '. ' Sebesar'. ' ' .'Rp'. number_format($amount, 0, ',', '.') . ' ' . ' Terima kasih.'."\n".'أَجَرَكَ اللهُ فِيْمَا أَعْطَيْتَ، وَجَعَلَهُ لَكَ طَهُوْرًا، وَبَارَكَ لَكَ فِيْمَا أَبْقَيْتَ'."\n".'Semoga Allah memberi pahala apa yang engkau berikan, semoga apa yang engkau berikan menjadi pencuci bagi dirimu, dan semoga Allah memberi keberkahan apa yang tertinggal pada dirimu.
                     '."\n".'jadimanfaat.org';
         SendWhatsAppNotification::dispatch($phone, $message);
         return ['success'=>1, 'msg'=> trans('app.payment_received_msg'), 'response' => $this->payment_success_html($donasi, $name)];
