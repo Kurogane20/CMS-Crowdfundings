@@ -58,43 +58,43 @@ class HomeController extends Controller
         return view('public.pages.show', compact('title', 'page'));
     }
 
-    public function contactUs(){
-        $title = trans('app.contact_us');
-        return view('public.pages.contact_us', compact('title'));
-    }
+    // public function contactUs(){
+    //     $title = trans('app.contact_us');
+    //     return view('public.pages.contact_us', compact('title'));
+    // }
 
-    public function contactUsPost(Request $request){
-        $rules = [
-            'name'  => 'required',
-            'email'  => 'required|email',
-            'subject'  => 'required',
-        ];
-        if (get_option('enable_recaptcha_contact_form') == 1){
-            $rules['g-recaptcha-response'] = 'required';
-        }
-        $this->validate($request, $rules);
+    // public function contactUsPost(Request $request){
+    //     $rules = [
+    //         'name'  => 'required',
+    //         'email'  => 'required|email',
+    //         'subject'  => 'required',
+    //     ];
+    //     if (get_option('enable_recaptcha_contact_form') == 1){
+    //         $rules['g-recaptcha-response'] = 'required';
+    //     }
+    //     $this->validate($request, $rules);
 
-        if (get_option('enable_recaptcha_contact_form') == 1) {
-            $secret = get_option('recaptcha_secret_key');
-            $gRecaptchaResponse = $request->input('g-recaptcha-response');
-            $remoteIp = $request->ip();
+    //     if (get_option('enable_recaptcha_contact_form') == 1) {
+    //         $secret = get_option('recaptcha_secret_key');
+    //         $gRecaptchaResponse = $request->input('g-recaptcha-response');
+    //         $remoteIp = $request->ip();
 
-            $recaptcha = new \ReCaptcha\ReCaptcha($secret);
-            $resp = $recaptcha->verify($gRecaptchaResponse, $remoteIp);
-            if (!$resp->isSuccess()) {
-                return redirect()->back()->with('error', 'reCAPTCHA is not verified');
-            }
-        }
+    //         $recaptcha = new \ReCaptcha\ReCaptcha($secret);
+    //         $resp = $recaptcha->verify($gRecaptchaResponse, $remoteIp);
+    //         if (!$resp->isSuccess()) {
+    //             return redirect()->back()->with('error', 'reCAPTCHA is not verified');
+    //         }
+    //     }
 
-        try{
-            Mail::send(new ContactUs($request));
-            Mail::send(new ContactUsSendToSender($request));
-        }catch (\Exception $exception){
-            return redirect()->back()->with('error', '<h4>'.trans('app.smtp_error_message').'</h4>'. $exception->getMessage());
-        }
+    //     try{
+    //         Mail::send(new ContactUs($request));
+    //         Mail::send(new ContactUsSendToSender($request));
+    //     }catch (\Exception $exception){
+    //         return redirect()->back()->with('error', '<h4>'.trans('app.smtp_error_message').'</h4>'. $exception->getMessage());
+    //     }
 
-        return redirect()->back()->with('success', trans('app.message_has_been_sent'));
-    }
+    //     return redirect()->back()->with('success', trans('app.message_has_been_sent'));
+    // }
 
 
     public function acceptCookie(Request $request){
