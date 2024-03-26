@@ -261,7 +261,8 @@ Campaign, campaign box, campaign preview
 }
 .box-campaign-summery ul li{
     display: inline-block;
-    width: 32%;
+    width: 30%;
+    text-align: center;
 }
 .box-campaign-summery ul li strong, .box-campaign-footer ul li strong{
     display: block;

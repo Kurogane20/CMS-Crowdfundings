@@ -76,7 +76,7 @@
                 <input type="hidden" name="campaign_id" value="{{$campaign->id}}" />
                <div class="donate_amount_field">
                     <div class="donate_currency">{!! get_currency_symbol(get_option('currency_sign')) !!}</div>
-                    <input type="text" id="donation_amount_display" step="1" min="1" class="form-control" style="text-indent: 10px;" placeholder="@lang('app.enter_amount')" required />
+                    <input type="text" id="donation_amount_display" step="1" min="1" class="form-control" style="text-indent: 10px;" placeholder="Masukkan donasi" required />
                     <input type="hidden" id="donation_amount" name="amount" />
                 </div>               
 

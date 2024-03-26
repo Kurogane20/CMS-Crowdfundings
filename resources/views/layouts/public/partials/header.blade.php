@@ -32,7 +32,7 @@
                     @endif
                 </ul>
                 <form action="{{route('search')}}" method="get">
-                    <input class="form-control" type="text" name="q" placeholder="@lang('app.search_campaigns')" aria-label="@lang('app.search_campaigns')">
+                    <input class="form-control" type="text" name="q" placeholder="Cari donasi" aria-label="@lang('app.search_campaigns')">
                 </form>
 
                 <!-- Right Side Of Navbar -->

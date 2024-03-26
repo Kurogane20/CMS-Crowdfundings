@@ -46,7 +46,7 @@
         <div class="container" style="margin-bottom: 0%">
             <div class="row" style="margin-bottom: 0%">
                 <div class="col-md-12">
-                    <h2 style="text-align: center; font-weight:bold; ">{!! get_option('banner_main_header') !!}</h2>
+                    <h2 class="section-title" style="font-weight: bold">{!! get_option('banner_main_header') !!}</h2>
                     <p class="jumbotron-sub-text" style="margin-bottom: 0%">لَنْ تَنَالُوا الْبِرَّ حَتّٰى تُنْفِقُوْا مِمَّا تُحِبُّوْنَ ۗوَمَا تُنْفِقُوْا مِنْ شَيْءٍ فَاِنَّ اللّٰهَ بِهٖ عَلِيْمٌ ٩٢</p>
                     <p class="jumbotron-sub-text" style="margin-bottom: 0%">{!! get_option('banner_sub_header') !!}</p>                   
                 </div>
@@ -109,7 +109,7 @@
                                     </div>
                                     <div class="box-campaign-content">
                                         <div class="box-campaign-description">
-                                            <h4><a href="{{route('campaign_single', [$nc->id, $nc->slug])}}"> {{$nc->title}} </a> </h4>
+                                            <h4 style="text-align: center"><a href="{{route('campaign_single', [$nc->id, $nc->slug])}}"> {{$nc->title}} </a> </h4>
                                             <p>{{$nc->short_description}}</p>
                                         </div>
 
