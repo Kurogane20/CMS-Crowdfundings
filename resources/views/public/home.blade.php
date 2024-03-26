@@ -94,7 +94,7 @@
 
                 <div class="row">
                     <div class="col-md-12">
-                        <h2 class="section-title"> Ayo Donasi </h2>
+                        <h2 class="section-title" style="font-weight: bold" > Ayo Donasi </h2>
                     </div>
                 </div>
 
