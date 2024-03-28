@@ -17,7 +17,7 @@
                     $updates_count = $campaign->updates->count();
                     $faqs_count = $campaign->faqs->count();
                     @endphp
-                    <ul>
+                    <ul style="font-weight: bold">
                         <li><a href="{{route('campaign_single', [$campaign->id, $campaign->slug])}}">Detail </a> </li>
                         <li><a href="{{route('campaign_backers', [$campaign->id, $campaign->slug])}}"> Donatur ({{$backers_count}}) </a> </li>
                         <li>
@@ -25,7 +25,7 @@
                                 @if($updates_count > 0) ({{$updates_count}}) @endif
                             </a> </li>
                         <li>
-                            <a href="{{route('campaign_faqs', [$campaign->id, $campaign->slug])}}"> @lang('app.faqs')  @if($faqs_count > 0) ({{$faqs_count}}) @endif </a>
+                            <a href="{{route('campaign_faqs', [$campaign->id, $campaign->slug])}}"> F.A.Q  @if($faqs_count > 0) ({{$faqs_count}}) @endif </a>
                         </li>
                     </ul>
                 </div>

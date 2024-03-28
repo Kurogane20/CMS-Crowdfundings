@@ -174,7 +174,7 @@
     <script>
         $(function() {
            
-            @if(get_option('enable_bank_transfer') == 1)
+            @if(get_option('enable_bank_transfer') == 0)
 
             $('#bankTransferBtn').click(function(){
                 $('.bankPaymetWrap').slideToggle();

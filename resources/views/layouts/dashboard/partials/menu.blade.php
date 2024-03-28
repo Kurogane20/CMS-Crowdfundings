@@ -68,9 +68,9 @@
                     </a>
                     <ul class="collapse nav flex-column ms-1" id="subsettings" data-bs-parent="#side-menu">
                         <li> <a class="nav-link text-white px-0" href="{{ route('general_settings') }}">@lang('app.general_settings')</a> </li>
-                        <li> <a class="nav-link text-white px-0" href="{{ route('payment_settings') }}">@lang('app.payment_settings')</a> </li>
+                        {{-- <li> <a class="nav-link text-white px-0" href="{{ route('payment_settings') }}">@lang('app.payment_settings')</a> </li> --}}
                         <li> <a class="nav-link text-white px-0" href="{{ route('theme_settings') }}">@lang('app.theme_settings')</a> </li>
-                        <li> <a class="nav-link text-white px-0" href="{{ route('social_settings') }}">@lang('app.social_settings')</a> </li>
+                        {{-- <li> <a class="nav-link text-white px-0" href="{{ route('social_settings') }}">@lang('app.social_settings')</a> </li> --}}
                         <li> <a class="nav-link text-white px-0" href="{{ route('re_captcha_settings') }}">@lang('app.re_captcha_settings')</a> </li>
                         <li> <a class="nav-link text-white px-0" href="{{ route('other_settings') }}">@lang('app.other_settings')</a> </li>
                     </ul>

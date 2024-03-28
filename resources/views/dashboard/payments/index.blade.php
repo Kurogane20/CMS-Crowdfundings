@@ -30,7 +30,7 @@
     </div>
 
     @if($payments->count() > 0)
-        <table class="table table-striped table-bordered">
+        <table class="table table-striped table-bordered" style="font-size: 11pt">
 
             <tr>
                 <th>@lang('app.campaign_title')</th>
@@ -39,8 +39,8 @@
                 <th>@lang('app.method')</th>
                 <th>@lang('app.time')</th>
                 <th>#</th>
-                <th>#</th>
-                <th width="90">#</th>
+                <th width ="100">#</th>
+                {{-- <th width="90">#</th> --}}
             </tr>
 
             @foreach($payments as $payment)
@@ -53,32 +53,29 @@
                         @endif
                     </td>
                     <td><a href="{{route('payment_view', $payment->id)}}"> {{$payment->email}} </a></td>
-                    <td>{!! get_amount($payment->amount) !!}</td>
+                    <td>{!! get_amount_raw($payment->amount) !!}</td>
                     <td>{{$payment->payment_method}}</td>
-                    <td><span data-toggle="tooltip" title="{{$payment->created_at->format('F d, Y h:i a')}}">{{$payment->created_at->format('F d, Y')}}</span></td>
+                    <td style="width: 200px"><span data-toggle="tooltip" title="{{$payment->created_at->format('d-m-Y, H:i:s')}}">{{$payment->created_at->format('d-m-Y, H:i:s')}}</span></td>
 
-                    <td>
-                        @if($payment->reward)
-                            <a href="{{route('payment_view', $payment->id)}}" data-toggle="tooltip" title="@lang('app.selected_reward')">
-                                <i class="fa fa-gift"></i>
-                            </a>
-                        @endif
-                    </td>
                     <td>
                         @if($payment->status == 'success')
                             <span class="text-success" data-toggle="tooltip" title="{{$payment->status}}"><i class="fa fa-check-circle-o"></i> </span>
                         @else
                             <span class="text-warning" data-toggle="tooltip" title="{{$payment->status}}"><i class="fa fa-exclamation-circle"></i> </span>
                         @endif
-
                     </td>
                     <td>
-                        <a href="{{route('payment_view', $payment->id)}}" class="btn btn-xs btn-default"><i class="fa fa-eye"></i> </a>
+                       <a href="{{route('payment_view', $payment->id)}}" class="btn btn-xs btn-default"><i class="fa fa-eye"></i> </a>
+                       <a href="{{route('payment_delete', $payment->id)}}" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure?')">
+                            <i class="fa fa-trash"></i>
+                        </a>
 
+                    </td>
+                    {{-- <td>
                         <a href="{{route('payment_delete', $payment->id)}}" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure?')">
                             <i class="fa fa-trash"></i>
                         </a>
-                    </td>
+                    </td> --}}
 
                 </tr>
             @endforeach
