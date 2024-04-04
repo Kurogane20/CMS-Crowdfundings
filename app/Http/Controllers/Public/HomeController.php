@@ -43,9 +43,10 @@ class HomeController extends Controller
 
         $campaigns_count = Campaign::all()->count();
         $users_count = User::all()->count();
+        $payment_created = Payment::success()->count();
         $fund_raised_count = Payment::whereStatus('success')->sum('amount');
 
-        return view('public.home', compact('title','categories', 'new_campaigns', 'funded_campaigns', 'campaigns_count', 'users_count', 'fund_raised_count'));
+        return view('public.home', compact('title','categories', 'new_campaigns', 'funded_campaigns', 'campaigns_count', 'users_count', 'fund_raised_count','payment_created'));
     }
     
     public function showPage($slug){

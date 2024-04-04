@@ -211,7 +211,7 @@
             <div class="row">
                 <div class="col-md-4"><h3>{{$campaigns_count}}</h3> <h4>@lang('app.campaigns')</h4></div>
                 <div class="col-md-4"> <h3>{!! get_amount($fund_raised_count) !!}</h3> <h4>@lang('app.funds_raised')</h4></div>
-                <div class="col-md-4"><h3>{{$users_count}}</h3> <h4>@lang('app.users')</h4></div>
+                <div class="col-md-4"><h3>{{$payment_created}}</h3> <h4>Donatur</h4></div>
             </div>
         </div>
     </section>
