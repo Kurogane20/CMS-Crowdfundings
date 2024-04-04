@@ -68,9 +68,9 @@
                     </a>
                     <ul class="collapse nav flex-column ms-1" id="subsettings" data-bs-parent="#side-menu">
                         <li> <a class="nav-link text-white px-0" href="{{ route('general_settings') }}">@lang('app.general_settings')</a> </li>
-                        <li> <a class="nav-link text-white px-0" href="{{ route('payment_settings') }}">@lang('app.payment_settings')</a> </li>
+                        {{-- <li> <a class="nav-link text-white px-0" href="{{ route('payment_settings') }}">@lang('app.payment_settings')</a> </li> --}}
                         <li> <a class="nav-link text-white px-0" href="{{ route('theme_settings') }}">@lang('app.theme_settings')</a> </li>
-                        <li> <a class="nav-link text-white px-0" href="{{ route('social_settings') }}">@lang('app.social_settings')</a> </li>
+                        {{-- <li> <a class="nav-link text-white px-0" href="{{ route('social_settings') }}">@lang('app.social_settings')</a> </li> --}}
                         <li> <a class="nav-link text-white px-0" href="{{ route('re_captcha_settings') }}">@lang('app.re_captcha_settings')</a> </li>
                         <li> <a class="nav-link text-white px-0" href="{{ route('other_settings') }}">@lang('app.other_settings')</a> </li>
                     </ul>
@@ -86,11 +86,11 @@
                         <span class="ms-1 d-none d-sm-inline">@lang('app.users')</span>
                     </a>
                 </li>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a href="{{route('withdrawal_requests')}}" class="nav-link text-white align-middle px-0">
                         <i class="fa fa-balance-scale"></i> <span class="ms-1 d-none d-sm-inline">@lang('app.withdrawal_requests')</span>
                     </a>
-                </li>
+                </li> --}}
             @endif
 
             <li class="nav-item">
@@ -98,11 +98,11 @@
                     <i class="fa fa-money"></i> <span class="ms-1 d-none d-sm-inline">@lang('app.payments')</span>
                 </a>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a href="{{route('withdraw')}}" class="nav-link text-white align-middle px-0">
                     <i class="fa fa-credit-card"></i> <span class="ms-1 d-none d-sm-inline">@lang('app.withdraw')</span>
                 </a>
-            </li>
+            </li> --}}
         </ul>
         <hr>
         <div class="dropdown pb-4">

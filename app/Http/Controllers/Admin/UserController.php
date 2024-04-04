@@ -100,7 +100,7 @@ class UserController extends Controller
 
             $image_name = strtolower(time().str_random(5).'-'.str_slug($file_base_name)).'.' . $image->getClientOriginalExtension();
 
-            $upload_dir = './uploads/avatar/';
+            $upload_dir = './storage/uploads/avatar/';
             if ( ! file_exists($upload_dir)){
                 mkdir($upload_dir, 0777, true);
             }
@@ -126,8 +126,40 @@ class UserController extends Controller
             }
 
         }
+        $data = [
+            'gender'       => $request->gender,
+            'address'      => $request->address,
+            'phone'        => $request->phone,
+            'country_id'   => $request->country_id            
+        ];
+        User::whereId($id)->update($data);
 
         return back()->with('success', trans('app.profile_edit_success_msg'));
+    }
+
+    public function store(Request $request)
+    {
+        // Validasi data
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users|max:255',
+            'active_status' => 'required|boolean',
+        ]);
+
+        // Simpan pengguna baru
+        $user = new User;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->active_status = $request->active_status;
+         // Set a default password
+        $defaultPassword = '12345678'; // Change this to your desired default password
+        $user->password = bcrypt($defaultPassword);
+        $user->save();
+
+       
+
+        // Redirect atau kirim respons sesuai kebutuhan
+        return back()->with('success', trans('user created'));
     }
 
 }

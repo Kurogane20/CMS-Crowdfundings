@@ -28,7 +28,7 @@
 
         @include('public.campaigns.partials.header')
 
-        <div class="container">
+        <div class="container" >
             <div class="row">
                 <div class="col-md-8">
                     @include('layouts.partials.alert')
@@ -69,7 +69,7 @@
 
                         {!! safe_output($campaign->description) !!}
 
-                        @if($enable_discuss)
+                        {{-- @if($enable_discuss)
                             <div class="comments-title"><h2> <i class="fa fa-comment"></i> @lang('app.comments')</h2></div>
                             <div id="disqus_thread"></div>
                             <script>
@@ -86,7 +86,7 @@
                             </script>
                             <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 
-                        @endif
+                        @endif --}}
 
 
                     </div>

@@ -14,7 +14,7 @@ class Category extends Model
 
     public function get_image_url(){
         if ($this->image){
-            $img_url = '/storage/uploads/categories/'.$this->image;
+            $img_url = url('/storage/uploads/categories/'.$this->image);
         }else{
             $img_url = asset('assets/images/placeholder.png');
         }

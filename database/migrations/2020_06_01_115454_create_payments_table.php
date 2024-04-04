@@ -26,12 +26,12 @@ class CreatePaymentsTable extends Migration
             $table->string('currency')->nullable();
             $table->string('token_id')->nullable();
             
-            $table->string('card_last4')->nullable();
-            $table->string('card_id')->nullable();
-            $table->string('card_brand')->nullable();
-            $table->string('card_country')->nullable();
-            $table->string('card_exp_month')->nullable();
-            $table->string('card_exp_year')->nullable();
+            // $table->string('card_last4')->nullable();
+            // $table->string('card_id')->nullable();
+            // $table->string('card_brand')->nullable();
+            // $table->string('card_country')->nullable();
+            // $table->string('card_exp_month')->nullable();
+            // $table->string('card_exp_year')->nullable();
 
             $table->string('client_ip')->nullable();
             $table->string('charge_id_or_token')->nullable();

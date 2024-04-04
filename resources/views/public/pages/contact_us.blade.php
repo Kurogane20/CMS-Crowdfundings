@@ -3,7 +3,7 @@
 @section('content')
     <section class="auth-form">
 
-        <div class="container">
+        <div class="container" style="padding-top: 70px">
             <div class="row">
                 <div class="col-md-8 offset-md-2">
                     <div class="card card-default">
@@ -66,7 +66,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row mb-3 {{ $errors->has('project_owner') ? ' is-invalid' : '' }}">
+                                {{-- <div class="row mb-3 {{ $errors->has('project_owner') ? ' is-invalid' : '' }}">
                                     <div class="col-md-6 offset-md-4">
                                         <label><input type="checkbox" name="project_owner" value="Project Owner" /> @lang('app.project_owner')</label>
                                     </div>
@@ -82,7 +82,7 @@
                                     <div class="col-md-6 offset-md-4">
                                         <label><input type="checkbox" name="other" value="Other" /> @lang('app.other')</label>
                                     </div>
-                                </div>
+                                </div> --}}
 
                                 @if(get_option('enable_recaptcha_contact_form') == 1)
                                     <div class="row mb-3  {{ $errors->has('g-recaptcha-response') ? ' is-invalid' : '' }}">

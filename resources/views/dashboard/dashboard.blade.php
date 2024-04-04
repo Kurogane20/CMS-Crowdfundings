@@ -274,10 +274,3 @@ $auth_user = \Auth::user();
 
 @endsection
 
-<style>
-    .bg{
-        background-color: rgb(129, 127, 255);
-        color: #000;
-        background: #000;
-    }
-</style>
