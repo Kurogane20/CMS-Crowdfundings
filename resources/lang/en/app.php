@@ -93,7 +93,7 @@ return [
     'email'                     => 'Email',
     'contribution_appearance'   => 'Penampilan Kontribusi',
     'name_displayed_publicly'   => 'Pilih nama untuk ditampilkan secara publik di samping kontribusi Anda di halaman donasi.',
-    'anonymous'                 => 'Anonymous',
+    'anonymous'                 => 'Hamba Allah',
     'you_are_contributing_to'   => 'You\'re contributing to ',
     'guest_checkout'            => 'Guest Checkout',
     'or'                        => 'Or',

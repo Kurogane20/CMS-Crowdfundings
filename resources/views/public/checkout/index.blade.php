@@ -23,7 +23,7 @@
 
                         <div class="row mb-3 {{ $errors->has('full_name')? 'is-invalid':'' }}">
                             <div class="col-sm-4">
-                                <input type="text" class="form-control" id="full_name" value="@if(Auth::check()){{auth()->user()->name}}@else{{ old('full_name') }}@endif" name="full_name" placeholder="Nama Donatur">
+                                <input type="text" class="form-control" id="full_name" value="@if(Auth::check()){{auth()->user()->name}}@else{{ old('full_name') }}@endif" name="full_name" placeholder="Nama Donatur*">
                                 {!! $errors->has('full_name')? '<p class="help-block">'.$errors->first('full_name').'</p>':'' !!}
                             </div>
                             <div class="col-sm-4">
@@ -31,7 +31,7 @@
                                 {!! $errors->has('email')? '<p class="help-block">'.$errors->first('email').'</p>':'' !!}
                             </div>
                             <div class="col-sm-4">
-                                <input type="text" class="form-control" id="phone" value="@if(Auth::check()){{auth()->user()->phone}}@else{{ old('phone') }}@endif" name="phone" placeholder="No. Telepon">
+                                <input type="text" class="form-control" id="phone" value="@if(Auth::check()){{auth()->user()->phone}}@else{{ old('phone') }}@endif" name="phone" placeholder="No. Telepon*">
                                 {!! $errors->has('phone')? '<p class="help-block">'.$errors->first('phone').'</p>':'' !!}
                             </div>
                         </div>
@@ -50,7 +50,7 @@
                                     </label>
 
                                     <label>
-                                        <input type="radio" name="contributor_name_display" value="anonymous"> Anonim
+                                        <input type="radio" name="contributor_name_display" value="anonymous"> Hamba Allah
                                     </label>
 
                                 </div>
@@ -139,7 +139,7 @@
         $(document).ready(function() {
             $('form').submit(function(event) {
                 var fullName = $('#full_name').val().trim();
-                var email = $('#email').val().trim();
+                // var email = $('#email').val().trim();
                 var phone = $('#phone').val().trim();
 
                 if (fullName === '' || email === '' || phone === '') {
