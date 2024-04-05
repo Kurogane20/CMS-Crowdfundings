@@ -52,7 +52,7 @@
                     @foreach($updates as $update)
                         <tr>
                             <td> {{ $update->title }}  </td>
-                            <td> {{ $update->description }}  </td>
+                            <td style="max-width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ $update->description }}</td>
                             <td width="100">
                                 <a href="{{ route('update_update', [$update->campaign_id,$update->id]) }}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> </a>
                                 <a href="javascript:;" class="btn btn-danger btn-xs" data-id="{{ $update->id }}"><i class="fa fa-trash"></i> </a>

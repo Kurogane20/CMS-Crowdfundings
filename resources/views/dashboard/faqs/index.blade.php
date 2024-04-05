@@ -53,7 +53,7 @@
                     @foreach($faqs as $faq)
                         <tr>
                             <td> {{ $faq->title }}  </td>
-                            <td> {{ $faq->description }}  </td>
+                            <td style="max-width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"> {{ $faq->description }}  </td>
                             <td width="100">
                                 <a href="{{ route('faq_update', [$faq->campaign_id,$faq->id]) }}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> </a>
                                 <a href="javascript:;" class="btn btn-danger btn-xs" data-id="{{ $faq->id }}"><i class="fa fa-trash"></i> </a>
