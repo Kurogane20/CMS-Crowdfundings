@@ -23,7 +23,7 @@
             <div class="row mb-3 {{ $errors->has('description')? 'is-invalid':'' }}">
                 <label for="description" class="col-sm-4 col-form-label">@lang('app.description')</label>
                 <div class="col-sm-8">
-                    <textarea class="form-control" name="description">{{old('description')}}</textarea>
+                    <textarea class="form-control description" name="description">{{old('description')}}</textarea>
                     {!! $errors->has('description')? '<p class="help-block">'.$errors->first('description').'</p>':'' !!}
                 </div>
             </div>
@@ -67,9 +67,10 @@
 @endsection
 
 @section('page-js')
-
+    <script src="{{ asset('assets/plugins/ckeditor/ckeditor.js') }}"></script>
     <script>
         $(document).ready(function() {
+            CKEDITOR.replaceClass = 'description';
             $('.btn-danger').on('click', function (e) {
                 if (!confirm("@lang('app.are_you_sure_undone')")) {
                     e.preventDefault();
