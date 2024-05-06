@@ -8,6 +8,7 @@ use App\Models\Payment;
 use App\Models\Withdrawal_request;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Jobs\SendWhatsAppNotification;
 
 class PaymentController extends Controller
 {
@@ -168,6 +169,22 @@ class PaymentController extends Controller
     
             // Save the updated totals
             $campaign->save();
+
+            $phones = [$payment->phone]; // Ambil nomor telepon dari pembayaran
+            $donasi = $campaign->title;
+            $name = $payment->name; // Ambil nama dari pembayaran
+            $amount = $payment->amount; // Ambil jumlah donasi dari pembayaran
+
+            $message = 'Assalamualaikum Warahmatullahi Wabarakatuh' . "\n" .
+                    'Donasi ' . $donasi . ' atas nama ' . $name . ' sebesar Rp ' . number_format($amount, 0, ',', '.') . '. Terima kasih.' . "\n" .
+                    'أَجَرَكَ اللهُ فِيْمَا أَعْطَيْتَ، وَجَعَلَهُ لَكَ طَهُوْرًا، وَبَارَكَ لَكَ فِيْمَا أَبْقَيْتَ' . "\n" .
+                    'Semoga Allah memberi pahala apa yang engkau berikan, semoga apa yang engkau berikan menjadi pencuci bagi dirimu, dan semoga Allah memberi keberkahan apa yang tertinggal pada dirimu. Aamiin.' . "\n" .
+                    'Terima Kasih' . "\n" .
+                    'Wassalamualaikum wa rahmatullahi wa barakatuhu.' . "\n" .
+                    'jadimanfaat.org';
+
+
+            SendWhatsAppNotification::dispatch($phones, $message);
         }
         
         return back()->with('success', trans('app.payment_status_changed'));

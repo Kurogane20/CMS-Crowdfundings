@@ -39,6 +39,10 @@
             <th>@lang('app.payer_email')</th>
             <td>{{$payment->email}}</td>
         </tr>
+         <tr>
+                <th>No HP</th>
+                <td>{{$payment->phone}}</td>
+            </tr>
 
         <tr>
             <th>@lang('app.amount')</th>
@@ -87,12 +91,7 @@
         @if($payment->payment_method == 'bank_transfer')
             <tr>
                 <th colspan="2"><h4>@lang('app.bank_transfer_information')</h4></th>
-            </tr>
-            
-            <tr>
-                <th>No HP</th>
-                <td>{{$payment->phone}}</td>
-            </tr>
+            </tr>           
 
             {{-- <tr>
                 <th>@lang('app.account_number')</th>
@@ -156,7 +155,7 @@
         </table>
     @endif
     <div id="imageContainer" style="display: none;">
-        <img id="paymentImage" src="" alt="{{ Storage::url($payment->bukti_pembayaran) }}" style="width: 500px; height:800px">
+        <img id="paymentImage" src="" alt="{{ Storage::url($payment->bukti_pembayaran) }}" style="width: 250px; height:400px">
     </div>
 
 

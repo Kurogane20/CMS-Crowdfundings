@@ -13,18 +13,18 @@ class SendWhatsAppNotification implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    protected $phone;
+    protected $phones;
     protected $message;
 
     /**
      * Create a new job instance.
      *
-     * @param string $phone
+     * @param array $phones
      * @param string $message
      */
-    public function __construct($phone, $message)
+    public function __construct(array $phones, $message)
     {
-        $this->phone = $phone;
+        $this->phones = $phones;
         $this->message = $message;
     }
 
@@ -35,18 +35,21 @@ class SendWhatsAppNotification implements ShouldQueue
      */
     public function handle()
     {
-        // Kirim notifikasi WhatsApp menggunakan Guzzle HTTP Client
+        // Kirim notifikasi WhatsApp untuk setiap nomor telepon
         $client = new Client();
-        $response = $client->post('https://api.watzap.id/v1/send_image_url', [
-            'json' => [
-                'api_key' => 'BC3KF5E3LIAF7FW3',
-                'number_key' => 'NTDtKsjQkGZbPTcL',
-                'phone_no' => $this->phone,
-                'url' => 'https://jadimanfaat.org/uploads/logo/1707337747ltdeq-favicon.png',
-                'message' => $this->message
-            ]
-        ]);
-
+        
+        foreach ($this->phones as $phone) {
+            $response = $client->post('https://api.watzap.id/v1/send_image_url', [
+                'json' => [
+                    'api_key' => 'BC3KF5E3LIAF7FW3',
+                    'number_key' => 'NTDtKsjQkGZbPTcL',
+                    'phone_no' => $phone,
+                    'url' => 'https://jadimanfaat.org/uploads/logo/1707337747ltdeq-favicon.png',
+                    'message' => $this->message
+                ]
+            ]);
+        }
+        
         // Anda bisa menambahkan log atau penanganan lainnya di sini
     }
 }

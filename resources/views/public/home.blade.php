@@ -64,7 +64,7 @@
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row" style="justify-content: center">
                 @foreach($categories as $cat)
                     <div class="col-md-3 col-sm-6 col-xs-12" style="min-width: 380px">
                         <div class="home-category-box">
@@ -209,11 +209,13 @@
     <section class="footer-campaign-stats">
         <div class="container">
             <div class="row">
-                <div class="col-md-4"><h3>{{$campaigns_count}}</h3> <h4>@lang('app.campaigns')</h4></div>
-                <div class="col-md-4"> <h3>{!! get_amount($fund_raised_count) !!}</h3> <h4>@lang('app.funds_raised')</h4></div>
-                <div class="col-md-4"><h3>{{$payment_created}}</h3> <h4>Donatur</h4></div>
+                <div class="col-md-3"><h3>{{$campaigns_count}}</h3> <h4>@lang('app.campaigns')</h4></div>
+                <div class="col-md-3"> <h3>{!! get_amount($fund_raised_count) !!}</h3> <h4>@lang('app.funds_raised')</h4></div>
+                <div class="col-md-3"><h3>{{$payment_created}}</h3> <h4>Donatur</h4></div>
+                <div class="col-md-3"><h3>{{$visitorCount}}</h3> <h4>Pengunjung</h4></div>
             </div>
         </div>
+        <a target="_blank" href="https://api.whatsapp.com/send?phone=6281292533031&text=Assalamualaikum%20Kak%2C%20Saya%20mau%20mendukung%20program%20jadimanfaat%2C%20Bagaimana%20caranya%3F.%20Terimakasih%20%F0%9F%99%8F" class="whatsapp-button"><i class="fa fa-whatsapp"></i></a>
     </section>
 
     @include('layouts.public.partials.get_start_section')
@@ -260,4 +262,45 @@
             });
         });
     </script>
+    <style>
+        .whatsapp-button{
+            position: fixed;
+            bottom: 15px;
+            right: 15px;
+            z-index: 99;
+            background-color: #25d366;
+            border-radius: 50px;
+            color: #ffffff;
+            text-decoration: none;
+            width: 50px;
+            height: 50px;
+            font-size: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            -webkit-box-shadow: 0px 0px 25px -6px rgba(0,0,0,1);
+            -moz-box-shadow: 0px 0px 25px -6px rgba(0,0,0,1);
+            box-shadow: 0px 0px 25px -6px rgba(0,0,0,1);
+            animation: effect 5s infinite ease-in;
+        }
+
+        @keyframes effect {
+            20%, 100% {
+                width: 50px;
+                height: 50px;
+                font-size: 30px;
+            }
+            0%, 10%{
+                width: 55px;
+                height: 55px;
+                font-size: 35px;
+            }
+            5%{
+                width: 50px;
+                height: 50px;
+                font-size: 30px;
+            }
+        }
+    </style>
 @endsection

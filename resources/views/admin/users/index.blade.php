@@ -7,11 +7,11 @@
     <div class="row">
         
         <div class="col-xs-12">
-            {{-- <div>
+            <div>
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addUserModal">
-                    <i class="fa fa-plus"></i> add user
+                    <i class="fa fa-plus"></i> Tambah Pengguna
                 </button> 
-            </div> --}}
+            </div>
 
             @if($users->count() > 0)
                 <p>{{number_format($users_count)}} @lang('app.total_users_found')</p>
@@ -20,7 +20,7 @@
                         <tr>
                             <td>@lang('app.name')</td>
                             <td>@lang('app.email')</td>
-                            <td>@lang('app.contributed')</td>
+                            <td>Role</td>
                             <td>@lang('app.actions')</td>
                         </tr>
 
@@ -32,10 +32,7 @@
                                 </td>
                                 <td>{{$user->email}}</td>
                                 <td>
-                                    @php $total_contributed = $user->contributed_amount(); @endphp
-                                    @if($total_contributed > 0)
-                                        {!! get_amount($total_contributed) !!}
-                                    @endif
+                                    {{$user->user_type}}
                                 </td>
 
                                 <td>
@@ -94,9 +91,16 @@
                         </div>
                         <div class="form-group">
                             <label for="active_status">Active Status</label>
-                            <select class="form-control" id="active_status" name="active_status" style="margin-bottom: 10px;>
+                            <select class="form-control" id="active_status" name="active_status" style="margin-bottom: 10px;">
                                 <option value="1">Active</option>
                                 <option value="0">Inactive</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="user_type">Role</label>
+                            <select class="form-control" id="user_type" name="user_type" style="margin-bottom: 10px;">
+                                <option value="admin">admin</option>
+                                <option value="user">user</option>
                             </select>
                         </div>
                         <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Add</button>

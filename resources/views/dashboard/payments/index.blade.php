@@ -34,7 +34,8 @@
 
             <tr>
                 <th>@lang('app.campaign_title')</th>
-                <th>@lang('app.payer_email')</th>
+                <th>@lang('app.name')</th>
+                <th>@lang('app.payer_hp')</th>
                 <th>@lang('app.amount')</th>
                 <th>@lang('app.method')</th>
                 <th>@lang('app.time')</th>
@@ -52,7 +53,8 @@
                             @lang('app.campaign_deleted')
                         @endif
                     </td>
-                    <td><a href="{{route('payment_view', $payment->id)}}"> {{$payment->email}} </a></td>
+                    <td>{{$payment->name}}</td>
+                    <td><a href="{{route('payment_view', $payment->id)}}"> {{$payment->phone}} </a></td>
                     <td>{!! get_amount_raw($payment->amount) !!}</td>
                     <td>{{$payment->payment_method}}</td>
                     <td style="width: 200px"><span data-toggle="tooltip" title="{{$payment->created_at->format('d-m-Y, H:i:s')}}">{{$payment->created_at->format('d-m-Y, H:i:s')}}</span></td>

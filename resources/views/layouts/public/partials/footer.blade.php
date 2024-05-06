@@ -71,7 +71,7 @@
                                     <li><a href="{{ route('single_page', $page->slug) }}">{{ $page->title }} </a></li>
                                 @endforeach
                             @endif
-                            {{-- <li><a href="{{route('contact_us')}}"> @lang('app.contact_us')</a></li> --}}
+                            <li><a href="{{route('csr')}}"> @lang('app.contact_us')</a></li>
 
                         </ul>
                     </div>

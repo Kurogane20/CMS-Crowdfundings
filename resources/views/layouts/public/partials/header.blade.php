@@ -28,8 +28,11 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('single_page', $page->slug) }}">{{ $page->title }} </a>
                             </li>
-                        @endforeach
+                        @endforeach                        
                     @endif
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('csr')}}"> @lang('app.contact_us')</a>
+                    </li>
                 </ul>
                 <form action="{{route('search')}}" method="get">
                     <input class="form-control" type="text" name="q" placeholder="Cari donasi" aria-label="@lang('app.search_campaigns')">

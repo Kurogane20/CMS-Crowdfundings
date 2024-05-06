@@ -14,6 +14,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
+use App\Models\VisitorCount;
+use App\Models\csr;
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
@@ -45,8 +48,10 @@ class HomeController extends Controller
         $users_count = User::all()->count();
         $payment_created = Payment::success()->count();
         $fund_raised_count = Payment::whereStatus('success')->sum('amount');
+        $today = Carbon::today();
+        $visitorCount = VisitorCount::where('date', $today)->value('count');
 
-        return view('public.home', compact('title','categories', 'new_campaigns', 'funded_campaigns', 'campaigns_count', 'users_count', 'fund_raised_count','payment_created'));
+        return view('public.home', compact('title','categories', 'new_campaigns', 'funded_campaigns', 'campaigns_count', 'users_count', 'fund_raised_count','payment_created','today','visitorCount'));
     }
     
     public function showPage($slug){
@@ -59,43 +64,26 @@ class HomeController extends Controller
         return view('public.pages.show', compact('title', 'page'));
     }
 
-    // public function contactUs(){
-    //     $title = trans('app.contact_us');
-    //     return view('public.pages.contact_us', compact('title'));
-    // }
+    public function csr(){
+        $title = trans('app.contact_us');
+        return view('public.pages.contact_us', compact('title'));
+    }
 
-    // public function contactUsPost(Request $request){
-    //     $rules = [
-    //         'name'  => 'required',
-    //         'email'  => 'required|email',
-    //         'subject'  => 'required',
-    //     ];
-    //     if (get_option('enable_recaptcha_contact_form') == 1){
-    //         $rules['g-recaptcha-response'] = 'required';
-    //     }
-    //     $this->validate($request, $rules);
+     public function csrpost(Request $request)
+    {
+       
+        // Simpan pengguna baru
+        $csr = new csr();
+        $csr->nama_pic = $request->nama_pic;
+        $csr->no_pic = $request->no_pic;        
+        $csr->nama_perusahaan = $request->nama_perusahaan;
+        $csr->email = $request->email;         
+        $csr->donasi = $request->donasi;         
+        $csr->save();
+       
 
-    //     if (get_option('enable_recaptcha_contact_form') == 1) {
-    //         $secret = get_option('recaptcha_secret_key');
-    //         $gRecaptchaResponse = $request->input('g-recaptcha-response');
-    //         $remoteIp = $request->ip();
-
-    //         $recaptcha = new \ReCaptcha\ReCaptcha($secret);
-    //         $resp = $recaptcha->verify($gRecaptchaResponse, $remoteIp);
-    //         if (!$resp->isSuccess()) {
-    //             return redirect()->back()->with('error', 'reCAPTCHA is not verified');
-    //         }
-    //     }
-
-    //     try{
-    //         Mail::send(new ContactUs($request));
-    //         Mail::send(new ContactUsSendToSender($request));
-    //     }catch (\Exception $exception){
-    //         return redirect()->back()->with('error', '<h4>'.trans('app.smtp_error_message').'</h4>'. $exception->getMessage());
-    //     }
-
-    //     return redirect()->back()->with('success', trans('app.message_has_been_sent'));
-    // }
+        return redirect()->back()->with('success', 'submitted successfully!');
+    }
 
 
     public function acceptCookie(Request $request){

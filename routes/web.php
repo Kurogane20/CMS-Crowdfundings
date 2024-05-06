@@ -34,8 +34,8 @@ Route::group(['prefix'=>'ajax'], function() {
 });
 
 // Contact Us
-// Route::get('contact-us', ['as' => 'contact_us', 'uses' => 'Public\HomeController@contactUs']);
-// Route::post('contact-us', ['as' => 'contact_us', 'uses' => 'Public\HomeController@contactUsPost']);
+Route::get('csr', ['as' => 'csr', 'uses' => 'Public\HomeController@csr']);
+Route::post('csr', ['as' => 'csr', 'uses' => 'Public\HomeController@csrpost']);
 
 // categories
 Route::get('search', ['as' => 'search', 'uses' => 'Public\CategoriesController@search']);

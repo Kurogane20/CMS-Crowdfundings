@@ -150,6 +150,7 @@ class UserController extends Controller
         $user = new User;
         $user->name = $request->name;
         $user->email = $request->email;
+        $user->user_type = $request->user_type;
         $user->active_status = $request->active_status;
          // Set a default password
         $defaultPassword = '12345678'; // Change this to your desired default password

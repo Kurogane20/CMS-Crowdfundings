@@ -178,7 +178,7 @@ class CheckoutController extends Controller
             }
 
             $file_base_name = str_replace('.'.$image->getClientOriginalExtension(), '', $image->getClientOriginalName());
-            $resized = Image::make($image)->resize(300, 200);
+            $resized = Image::make($image)->resize(500, 800);
 
             $image_name = strtolower(time().str_random(5).'-'.str_slug($file_base_name)).'.' . $image->getClientOriginalExtension();
             $imageFileName = $upload_dir.$image_name;
@@ -228,11 +228,12 @@ class CheckoutController extends Controller
         //send email notification        
         SendBankTransferReceivedEmail::dispatch($payments_data);
         // Kirim notifikasi WhatsApp
-        $phone =$payments_data['phone'];
+        $phones = ['081292533031'];
         $donasi = $campaign->title;
-        $message = 'Assalamualaikum Warahmatullahi Wabarakatuh'. "\n" .'Kami telah menerima donasi'.' '.$donasi.' '.'atas nama' .$name.' '. ' Sebesar'. ' ' .'Rp'. number_format($amount, 0, ',', '.') . ' ' . ' Terima kasih.'."\n".'أَجَرَكَ اللهُ فِيْمَا أَعْطَيْتَ، وَجَعَلَهُ لَكَ طَهُوْرًا، وَبَارَكَ لَكَ فِيْمَا أَبْقَيْتَ'."\n".'Semoga Allah memberi pahala apa yang engkau berikan, semoga apa yang engkau berikan menjadi pencuci bagi dirimu, dan semoga Allah memberi keberkahan apa yang tertinggal pada dirimu.
-                    '."\n".'jadimanfaat.org';
-        SendWhatsAppNotification::dispatch($phone, $message);
+        $message = 'Transaksi masuk berupa donasi '. $donasi . ' atas nama ' . $name . ' silahkan lakukan verifikasi';
+        $job = new SendWhatsAppNotification($phones, $message);
+        dispatch($job);
+
         return ['success'=>1, 'msg'=> trans('app.payment_received_msg'), 'response' => $this->payment_success_html($donasi, $name)];
         
     }
