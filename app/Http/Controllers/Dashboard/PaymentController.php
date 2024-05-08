@@ -175,12 +175,12 @@ class PaymentController extends Controller
             $name = $payment->name; // Ambil nama dari pembayaran
             $amount = $payment->amount; // Ambil jumlah donasi dari pembayaran
 
-            $message = 'Assalamualaikum Warahmatullahi Wabarakatuh' . "\n" .
-                    'Donasi ' . $donasi . ' atas nama ' . $name . ' sebesar Rp ' . number_format($amount, 0, ',', '.') . '. Terima kasih.' . "\n" .
-                    'أَجَرَكَ اللهُ فِيْمَا أَعْطَيْتَ، وَجَعَلَهُ لَكَ طَهُوْرًا، وَبَارَكَ لَكَ فِيْمَا أَبْقَيْتَ' . "\n" .
-                    'Semoga Allah memberi pahala apa yang engkau berikan, semoga apa yang engkau berikan menjadi pencuci bagi dirimu, dan semoga Allah memberi keberkahan apa yang tertinggal pada dirimu. Aamiin.' . "\n" .
-                    'Terima Kasih' . "\n" .
-                    'Wassalamualaikum wa rahmatullahi wa barakatuhu.' . "\n" .
+            $message = 'Assalamualaikum Warahmatullahi Wabarakatuh' . "\n" . "\n".
+                    'Kami telah menerima dana atas nama ' . $name . ' Sejumlah Rp. ' . number_format($amount, 0, ',', '.') . ' Untuk disalurkan kepada kampanye ' .$donasi . '. Terima kasih atas doanasi anda.' . "\n" . "\n".
+                    'أَجَرَكَ اللهُ فِيْمَا أَعْطَيْتَ، وَجَعَلَهُ لَكَ طَهُوْرًا، وَبَارَكَ لَكَ فِيْمَا أَبْقَيْتَ' . "\n" . "\n".
+                    'Semoga Allah memberi pahala apa yang engkau berikan, semoga apa yang engkau berikan menjadi pencuci bagi dirimu, dan semoga Allah memberi keberkahan apa yang tertinggal pada dirimu. Aamiin.' . "\n" ."\n".
+                    'Terima Kasih' . "\n" . "\n".
+                    'Wassalamualaikum wa rahmatullahi wa barakatuhu.' . "\n" . "\n".
                     'jadimanfaat.org';
 
 
@@ -191,7 +191,19 @@ class PaymentController extends Controller
     }
 
     public function delete($id){
-        Payment::find($id)->delete();
+        $payment = Payment::find($id);
+        $campaign = Campaign::find($payment->campaign_id);
+
+        // Kurangi total dana dan total pembayaran kampanye
+        $campaign->total_funded -= $payment->amount;
+        $campaign->total_payments--;
+
+        // Simpan perubahan
+        $campaign->save();
+
+        // Hapus pembayaran
+        $payment->delete();
+
         return back()->with('success', __('app.success'));
     }
 

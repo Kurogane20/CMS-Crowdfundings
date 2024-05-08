@@ -105,7 +105,7 @@ $auth_user = \Auth::user();
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>            
 
             {{-- <div class="col-lg-3 col-md-6 p-2">
                 <div class="card bg-info">
@@ -187,6 +187,30 @@ $auth_user = \Auth::user();
         <div class="col-md-12 pt-5">
             <div class="card bg-default">
                 <div class="card-header">
+                    Statistik Halaman
+                </div>
+                <div class="card-body">
+                    <table class="table table-striped table-bordered">
+                        <tr>
+                            <th>Halaman</th>
+                            <th>Pengunjung</th>
+                        </tr>
+
+                        @foreach($pageViews as $pageView)
+                            <tr>
+                                <td>{{$pageView->url}}</td>
+                                <td>{{$pageView->count}} </td>
+                            </tr>
+                        @endforeach
+                    </table>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="col-md-12 pt-5">
+            <div class="card bg-default">
+                <div class="card-header">
                     @lang('app.last_pending_campaigns')
                 </div>
 
@@ -225,7 +249,7 @@ $auth_user = \Auth::user();
 
                             <tr>
                                 <th>@lang('app.campaign_title')</th>
-                                <th>@lang('app.payer_email')</th>
+                                <th>@lang('app.phone')</th>
                                 <th>@lang('app.amount')</th>
                                 <th>@lang('app.time')</th>
                                 <th>#</th>
@@ -242,7 +266,7 @@ $auth_user = \Auth::user();
                                             @lang('app.campaign_deleted')
                                         @endif
                                     </td>
-                                    <td><a href="{{route('payment_view', $payment->id)}}"> {{$payment->email}} </a></td>
+                                    <td><a href="{{route('payment_view', $payment->id)}}"> {{$payment->phone}} </a></td>
                                     <td>{!! get_amount($payment->amount) !!}</td>
                                     <td><span data-toggle="tooltip" title="{{$payment->created_at->format('F d, Y h:i a')}}">{{$payment->created_at->format('F d, Y')}}</span></td>
 

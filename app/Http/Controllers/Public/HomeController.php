@@ -39,7 +39,15 @@ class HomeController extends Controller
         $title = get_option('banner_main_header');
         
         $categories = Category::orderBy('category_name', 'asc')->take(8)->get();
-        $new_campaigns = Campaign::active()->orderBy('id', 'desc')->paginate(8);
+        // $new_campaigns = Campaign::active()->orderBy('id', 'desc')->paginate(8);
+         $new_campaigns = Campaign::active()
+                                ->whereNotIn('id', function($query) {
+                                    $query->select('campaign_id')
+                                          ->from('payments')
+                                          ->where('is_funded', '1');
+                                })
+                                ->orderBy('id', 'desc')
+                                ->paginate(8);
         $funded_campaigns = Campaign::active()->funded()->orderBy('id', 'desc')->take(8)->get();
         
         $new_campaigns->withPath('ajax/new-campaigns');

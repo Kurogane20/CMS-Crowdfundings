@@ -98,14 +98,10 @@ class CheckoutController extends Controller
 
     
     
-    public function payment_success_html($donasi, $name){
+    public function payment_success_html($donasi, $name, $amount){
       
         $html = ' <div class="payment-received">
-                            <h1> <i class="fa fa-check-circle-o"></i> Kami telah menerima donasi '.$donasi.' atas nama '.$name.'</h1>                            
-                            <p>أَجَرَكَ اللهُ فِيْمَا أَعْطَيْتَ، وَجَعَلَهُ لَكَ طَهُوْرًا، وَبَارَكَ لَكَ فِيْمَا أَبْقَيْتَ</p>                            
-                            <p>Semoga Allah memberi pahala apa yang engkau berikan, semoga apa yang engkau berikan menjadi pencuci bagi dirimu, dan semoga Allah memberi keberkahan apa yang tertinggal pada dirimu.
-                            </p> 
-                                                     
+                            <h1> <i class="fa fa-check-circle-o"></i>Kami sedang memverifikasi dana yang dikirimkan atas nama '.$name.' Sejumlah Rp. '.$amount.' untuk donasi '.$donasi.'</h1>
                             <a href="'.route('home').'" class="btn btn-filled">'.trans('app.home').'</a>
                         </div>';
         return $html;
@@ -228,13 +224,13 @@ class CheckoutController extends Controller
         //send email notification        
         SendBankTransferReceivedEmail::dispatch($payments_data);
         // Kirim notifikasi WhatsApp
-        $phones = ['081292533031'];
+        $phones = ['082221080800','082280008170'];
         $donasi = $campaign->title;
         $message = 'Transaksi masuk berupa donasi '. $donasi . ' atas nama ' . $name . ' silahkan lakukan verifikasi';
         $job = new SendWhatsAppNotification($phones, $message);
         dispatch($job);
 
-        return ['success'=>1, 'msg'=> trans('app.payment_received_msg'), 'response' => $this->payment_success_html($donasi, $name)];
+        return ['success'=>1, 'msg'=> trans('app.payment_received_msg'), 'response' => $this->payment_success_html($donasi, $name, $amount)];
         
     }
 

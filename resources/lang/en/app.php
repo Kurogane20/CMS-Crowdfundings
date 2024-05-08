@@ -174,7 +174,7 @@ return [
     'mark_as_funded'        => 'Mark as funded',
     'approve'               => 'Approve',
     'block'                 => 'Block',
-    'recently_funded_campaigns' => 'Recently Funded Campaigns',
+    'recently_funded_campaigns' => 'Kampanye yang selesai',
     'search'                => 'Search',
     'campaign_title_keyword'    => 'Campaign title keyword',
     'add_staff_picks'       => 'Add staff picks',
