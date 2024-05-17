@@ -20,7 +20,12 @@
                                     <h2 class="update-title"> {{$update->title}} </h2>
                                     <p class="text-muted"> {{$update->created_at->format('j F Y')}} </p>
 
-                                    {!! safe_output(nl2br($update->description)) !!}
+                                    <div style="text-align: justify;">
+                                        {!! safe_output(nl2br($update->description)) !!}
+                                    </div>
+                                    <div style="text-align: center;">
+                                        <img src="{{ $update->get_image_url() }}" style="display: inline-block; width: 500px; height:200px" />
+                                    </div>
                                 </div>
                             @endforeach
 

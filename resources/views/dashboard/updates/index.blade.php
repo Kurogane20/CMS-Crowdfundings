@@ -23,10 +23,18 @@
             <div class="row mb-3 {{ $errors->has('description')? 'is-invalid':'' }}">
                 <label for="description" class="col-sm-4 col-form-label">@lang('app.description')</label>
                 <div class="col-sm-8">
-                    <textarea class="form-control description" name="description">{{old('description')}}</textarea>
+                    <textarea class="form-control" name="description">{{old('description')}}</textarea>
                     {!! $errors->has('description')? '<p class="help-block">'.$errors->first('description').'</p>':'' !!}
                 </div>
             </div>
+
+            <div class="row mb-3 {{ $errors->has('image')? 'is-invalid':'' }}">
+                <label for="image" class="col-sm-4 col-form-label">@lang('app.image')</label>
+                <div class="col-sm-8">
+                    <input type="file" class="form-control" id="image" name="image" placeholder="@lang('app.image')">
+                    {!! $errors->has('image')? '<p class="help-block">'.$errors->first('image').'</p>':'' !!}
+                </div>
+            </div> 
 
 
             <div class="row mb-3">
@@ -47,12 +55,15 @@
                     <tr>
                         <th>@lang('app.title') </th>
                         <th>@lang('app.description') </th>
+                        <th>@lang('app.image') </th>
                         <th>@lang('app.action') </th>
                     </tr>
                     @foreach($updates as $update)
                         <tr>
                             <td> {{ $update->title }}  </td>
-                            <td style="max-width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ $update->description }}</td>
+                            <td> {{ $update->description }}  </td>
+                            {{-- <td> <img src="{{ uploaded_asset($update->image) }}" width="100" /> </td> --}}
+                            <td> <img src="{{$update->get_image_url()}}" height="100" class="img-responsive" />  </td>
                             <td width="100">
                                 <a href="{{ route('update_update', [$update->campaign_id,$update->id]) }}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> </a>
                                 <a href="javascript:;" class="btn btn-danger btn-xs" data-id="{{ $update->id }}"><i class="fa fa-trash"></i> </a>
@@ -67,10 +78,9 @@
 @endsection
 
 @section('page-js')
-    <script src="{{ asset('assets/plugins/ckeditor/ckeditor.js') }}"></script>
+
     <script>
         $(document).ready(function() {
-            CKEDITOR.replaceClass = 'description';
             $('.btn-danger').on('click', function (e) {
                 if (!confirm("@lang('app.are_you_sure_undone')")) {
                     e.preventDefault();

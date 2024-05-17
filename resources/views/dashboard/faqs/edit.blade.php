@@ -1,3 +1,4 @@
+
 @extends('layouts.dashboard.app')
 @section('title') @if( ! empty($title)) {{ $title }} | @endif @parent @endsection
 
@@ -19,7 +20,7 @@
             <div class="row mb-3 {{ $errors->has('description')? 'is-invalid':'' }}">
                 <label for="description" class="col-sm-4 col-form-label">@lang('app.description')</label>
                 <div class="col-sm-8">
-                    <textarea class="form-control description" name="description">{{$faq->description}}</textarea>
+                    <textarea class="form-control" name="description">{{$faq->description}}</textarea>
                     {!! $errors->has('description')? '<p class="help-block">'.$errors->first('description').'</p>':'' !!}
                 </div>
             </div>
@@ -35,13 +36,4 @@
         </div>
 
     </div>
-@endsection
-
-@section('page-js')
-    <script src="{{ asset('assets/plugins/ckeditor/ckeditor.js') }}"></script>
-    <script>
-        $(document).ready(function() {
-            CKEDITOR.replaceClass = 'description';
-        });
-    </script>
 @endsection

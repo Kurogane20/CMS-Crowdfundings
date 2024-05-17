@@ -24,7 +24,7 @@
             <div class="row mb-3 {{ $errors->has('description')? 'is-invalid':'' }}">
                 <label for="description" class="col-sm-4 col-form-label">@lang('app.description')</label>
                 <div class="col-sm-8">
-                    <textarea class="form-control description" name="description">{{old('description')}}</textarea>
+                    <textarea class="form-control" name="description">{{old('description')}}</textarea>
                     {!! $errors->has('description')? '<p class="help-block">'.$errors->first('description').'</p>':'' !!}
                 </div>
             </div>
@@ -53,7 +53,7 @@
                     @foreach($faqs as $faq)
                         <tr>
                             <td> {{ $faq->title }}  </td>
-                            <td style="max-width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"> {{ $faq->description }}  </td>
+                            <td> {{ $faq->description }}  </td>
                             <td width="100">
                                 <a href="{{ route('faq_update', [$faq->campaign_id,$faq->id]) }}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> </a>
                                 <a href="javascript:;" class="btn btn-danger btn-xs" data-id="{{ $faq->id }}"><i class="fa fa-trash"></i> </a>
@@ -67,10 +67,9 @@
 @endsection
 
 @section('page-js')
-    <script src="{{ asset('assets/plugins/ckeditor/ckeditor.js') }}"></script>
+
     <script>
         $(document).ready(function() {
-            CKEDITOR.replaceClass = 'description';
             $('.btn-danger').on('click', function (e) {
                 if (!confirm("@lang('app.are_you_sure_undone')")) {
                     e.preventDefault();
