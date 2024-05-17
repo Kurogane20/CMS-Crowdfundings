@@ -98,13 +98,12 @@ class CheckoutController extends Controller
 
     
     
-    public function payment_success_html($donasi, $name, $amount){
-      
-        $html = ' <div class="payment-received">
-                            <h1> <i class="fa fa-check-circle-o"></i>Kami sedang memverifikasi dana yang dikirimkan atas nama '.$name.' Sejumlah Rp. '.$amount.' untuk donasi '.$donasi.'</h1>
-                            <a href="'.route('home').'" class="btn btn-filled">'.trans('app.home').'</a>
-                        </div>';
-        return $html;
+    public function payment_success_html($donasi, $name, $amount)
+    {
+        return '<div class="payment-received">
+                    <h3><i class="fa fa-check-circle-o"></i>Kami sedang memverifikasi dana yang dikirimkan atas nama ' . $name . ' sejumlah Rp. ' . number_format($amount, 0, ',', '.') . ' untuk donasi ' . $donasi . '</h1>
+                    <a href="' . route('home') . '" class="btn btn-filled">' . trans('app.home') . '</a>
+                </div>';
     }
     
     public function paymentSuccess(Request $request, $transaction_id = null){

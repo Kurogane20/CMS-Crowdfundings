@@ -39,12 +39,12 @@ class SendWhatsAppNotification implements ShouldQueue
         $client = new Client();
         
         foreach ($this->phones as $phone) {
-            $response = $client->post('https://api.watzap.id/v1/send_image_url', [
+            $response = $client->post('https://api.watzap.id/v1/send_message', [
                 'json' => [
                     'api_key' => 'BC3KF5E3LIAF7FW3',
                     'number_key' => 'NTDtKsjQkGZbPTcL',
                     'phone_no' => $phone,
-                    'url' => 'https://jadimanfaat.org/uploads/logo/1707337747ltdeq-favicon.png',
+                    // 'url' => 'https://jadimanfaat.org/uploads/logo/1707337747ltdeq-favicon.png',
                     'message' => $this->message
                 ]
             ]);

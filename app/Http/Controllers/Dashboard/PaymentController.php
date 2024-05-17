@@ -154,40 +154,45 @@ class PaymentController extends Controller
         return view('dashboard.payments.index', compact('title', 'payments'));
     }
 
-    public function markSuccess($id, $status){
+    public function markSuccess($id, $status)
+    {
         $payment = Payment::find($id);
         $payment->status = $status;
         $payment->save();
 
-        // gunakan rollback
-        // update payment kmudian update campaign 
         if ($status == 'success') {
-            $campaign = Campaign::find($payment->campaign_id);
-            $campaign->total_funded += $payment->amount;
-            $campaign->total_payments++;
-            $campaign->total_payments = Payment::where('campaign_id', $campaign->id)->where('status', 'success')->count();
-    
-            // Save the updated totals
-            $campaign->save();
-
-            $phones = [$payment->phone]; // Ambil nomor telepon dari pembayaran
-            $donasi = $campaign->title;
-            $name = $payment->name; // Ambil nama dari pembayaran
-            $amount = $payment->amount; // Ambil jumlah donasi dari pembayaran
-
-            $message = 'Assalamualaikum Warahmatullahi Wabarakatuh' . "\n" . "\n".
-                    'Kami telah menerima dana atas nama ' . $name . ' Sejumlah Rp. ' . number_format($amount, 0, ',', '.') . ' Untuk disalurkan kepada kampanye ' .$donasi . '. Terima kasih atas doanasi anda.' . "\n" . "\n".
-                    'أَجَرَكَ اللهُ فِيْمَا أَعْطَيْتَ، وَجَعَلَهُ لَكَ طَهُوْرًا، وَبَارَكَ لَكَ فِيْمَا أَبْقَيْتَ' . "\n" . "\n".
-                    'Semoga Allah memberi pahala apa yang engkau berikan, semoga apa yang engkau berikan menjadi pencuci bagi dirimu, dan semoga Allah memberi keberkahan apa yang tertinggal pada dirimu. Aamiin.' . "\n" ."\n".
-                    'Terima Kasih' . "\n" . "\n".
-                    'Wassalamualaikum wa rahmatullahi wa barakatuhu.' . "\n" . "\n".
-                    'jadimanfaat.org';
-
-
-            SendWhatsAppNotification::dispatch($phones, $message);
+            $this->updateCampaign($payment);
+            $this->sendWhatsAppNotification($payment);
         }
-        
+
         return back()->with('success', trans('app.payment_status_changed'));
+    }
+
+    private function updateCampaign($payment)
+    {
+        $campaign = Campaign::find($payment->campaign_id);
+        $campaign->total_funded += $payment->amount;
+        $campaign->total_payments++;
+        $campaign->total_payments = Payment::where('campaign_id', $campaign->id)->where('status', 'success')->count();
+        $campaign->save();
+    }
+
+    private function sendWhatsAppNotification($payment)
+    {
+        $recipientPhones = [$payment->phone];
+        $message = $this->generateWhatsAppMessage($payment);
+        SendWhatsAppNotification::dispatch($recipientPhones, $message);
+    }
+
+    private function generateWhatsAppMessage($payment)
+    {
+        return "*Assalamualaikum Warahmatullahi Wabarakatuh*\n\n" .
+            "Kami telah menerima dana atas nama {$payment->name} Sejumlah Rp. " . number_format($payment->amount, 0, ',', '.') .
+            " Untuk disalurkan kepada kampanye {$payment->campaign->title}. Terima kasih atas donasi anda.\n\n" .
+            "*أَجَرَكَ اللهُ فِيْمَا أَعْطَيْتَ، وَجَعَلَهُ لَكَ طَهُوْرًا، وَبَارَكَ لَكَ فِيْمَا أَبْقَيْتَ*\n\n" .
+            "Semoga Allah memberi pahala apa yang engkau berikan, semoga apa yang engkau berikan menjadi pencuci bagi dirimu, dan semoga Allah memberi keberkahan apa yang tertinggal pada dirimu. Aamiin.\n\n" .
+            "Terima Kasih\n\n" .
+            "*Wassalamualaikum wa rahmatullahi wa barakatuhu.*";
     }
 
     public function delete($id){
