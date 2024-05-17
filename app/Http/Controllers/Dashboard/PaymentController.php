@@ -192,7 +192,8 @@ class PaymentController extends Controller
             "*أَجَرَكَ اللهُ فِيْمَا أَعْطَيْتَ، وَجَعَلَهُ لَكَ طَهُوْرًا، وَبَارَكَ لَكَ فِيْمَا أَبْقَيْتَ*\n\n" .
             "Semoga Allah memberi pahala apa yang engkau berikan, semoga apa yang engkau berikan menjadi pencuci bagi dirimu, dan semoga Allah memberi keberkahan apa yang tertinggal pada dirimu. Aamiin.\n\n" .
             "Terima Kasih\n\n" .
-            "*Wassalamualaikum wa rahmatullahi wa barakatuhu.*";
+            "*Wassalamualaikum wa rahmatullahi wa barakatuhu.*\n\n" .
+            "jadimanfaat.org";
     }
 
     public function delete($id){
