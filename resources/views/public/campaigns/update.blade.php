@@ -24,7 +24,7 @@
                                         {!! safe_output(nl2br($update->description)) !!}
                                     </div>
                                     <div style="text-align: center;">
-                                        <img src="{{ $update->get_image_url() }}" style="display: inline-block; width: 500px; height:200px" />
+                                        <img src="{{ $update->get_image_url() }}" style="display: inline-block; width: 500px; min-height:290px" />
                                     </div>
                                 </div>
                             @endforeach
