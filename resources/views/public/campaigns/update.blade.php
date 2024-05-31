@@ -18,7 +18,7 @@
                                     
                                     @php
                                         // Split the description into paragraphs
-                                        $paragraphs = explode("\n", nl2br($update->description));
+                                        $paragraphs = explode("\n", safe_output($update->description));
                                         $imageUrls = $update->getImageUrls();
                                         $imageCount = count($imageUrls);
                                         $imageIndex = 0;
@@ -27,7 +27,7 @@
                                     <div style="text-align: justify;">
                                         @foreach($paragraphs as $index => $paragraph)
                                             @if(trim($paragraph) !== '')
-                                                <p>{!! safe_output($paragraph) !!}</p>
+                                                <p >{!! safe_output($paragraph) !!}</p>
                                             @endif
 
                                             @if ($imageIndex < $imageCount && (($index + 1) % 2 == 0)) 
