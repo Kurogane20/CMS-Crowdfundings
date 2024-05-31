@@ -39,6 +39,10 @@
             <th>@lang('app.payer_email')</th>
             <td>{{$payment->email}}</td>
         </tr>
+         <tr>
+                <th>No HP</th>
+                <td>{{$payment->phone}}</td>
+            </tr>
 
         <tr>
             <th>@lang('app.amount')</th>
@@ -87,13 +91,9 @@
         @if($payment->payment_method == 'bank_transfer')
             <tr>
                 <th colspan="2"><h4>@lang('app.bank_transfer_information')</h4></th>
-            </tr>
-            <tr>
-                <th>@lang('app.bank_swift_code')</th>
-                <td>{{$payment->bank_swift_code}}</td>
-            </tr>
+            </tr>           
 
-            <tr>
+            {{-- <tr>
                 <th>@lang('app.account_number')</th>
                 <td>{{$payment->account_number}}</td>
             </tr>
@@ -101,9 +101,9 @@
             <tr>
                 <th>@lang('app.branch_name')</th>
                 <td>{{$payment->branch_name}}</td>
-            </tr>
+            </tr> --}}
 
-            <tr>
+            {{-- <tr>
                 <th>@lang('app.branch_address')</th>
                 <td>{{$payment->branch_address}}</td>
             </tr>
@@ -116,6 +116,17 @@
             <tr>
                 <th>@lang('app.iban')</th>
                 <td>{{$payment->iban}}</td>
+            </tr> --}}
+            <tr>
+                <th>Bukti Pembayaran</th>
+                <td>
+                    @if($payment->bukti_pembayaran)
+                        <!-- Tambahkan tombol untuk menampilkan gambar -->
+                        <button class="btn btn-primary" onclick="toggleImage('{{ $payment->get_image_url() }}')">Tampilkan Gambar</button>
+                    @else
+                        @lang('app.payment_proof_not_available')
+                    @endif
+                </td>
             </tr>
         @endif
 
@@ -143,10 +154,31 @@
             </tr>
         </table>
     @endif
+    <div id="imageContainer" style="display: none;">
+        <img id="paymentImage" src="" alt="{{ Storage::url($payment->bukti_pembayaran) }}" style="width: 250px; height:400px">
+    </div>
 
 
     @if($payment->status != 'success')
         <a href="{{route('status_change', [$payment->id, 'success'] )}}" class="btn btn-success"><i class="fa fa-check-circle-o"></i> @lang('app.mark_as_success') </a>
     @endif
+
+
+    <script>
+         function toggleImage(imageUrl) {
+            var imageContainer = document.getElementById('imageContainer');
+            var paymentImage = document.getElementById('paymentImage');
+
+            // Jika kontainer gambar sedang ditampilkan, sembunyikan gambar dan atur sumber gambar ke kosong
+            if (imageContainer.style.display === 'block') {
+                imageContainer.style.display = 'none';
+                paymentImage.src = '';
+            } else {
+                // Jika kontainer gambar sedang disembunyikan, tampilkan gambar dan atur sumber gambar
+                paymentImage.src = imageUrl;
+                imageContainer.style.display = 'block';
+            }
+        }
+    </script>
 
 @endsection

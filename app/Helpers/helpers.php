@@ -70,7 +70,7 @@ if ( ! function_exists('get_post_url')){
  * @return logo url
  */
 function logo_url(){
-    return '/uploads/logo/'.get_option('logo');
+    return url('/uploads/logo/'.get_option('logo'));
 }
 
 /**
@@ -253,7 +253,7 @@ function get_amount_raw($amount = 0 ){
         $get_price = (int) $amount;
     }else{
         if ($amount > 0){
-            $get_price = number_format($amount,2);
+            $get_price = number_format($amount);
         }
     }
 

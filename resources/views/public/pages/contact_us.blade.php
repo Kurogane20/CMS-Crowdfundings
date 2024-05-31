@@ -1,110 +1,112 @@
 @extends('layouts.public.app')
 
 @section('content')
-    <section class="auth-form">
-
+    <section class="home-campaign section-bg-white" style="padding-top: 70px">
         <div class="container">
+
+            {{-- <div class="row">
+                <div class="col-md-12">
+                    <h2 class="section-title">Kenapa Memilih Kami</h2>
+                </div>
+            </div> --}}
+
+            {{-- <div class="row">
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    <div class="why-choose-us-box">
+                        <div class="icon">
+                            <i class="fa fa-lock"></i>
+                        </div>
+                        <div class="title">
+                            <h4>@lang('app.secure')</h4>
+                        </div>
+                        <div class="desc">
+                            <p>@lang('app.secure_desc')</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    <div class="why-choose-us-box">
+                        <div class="icon">
+                            <i class="fa fa-history"></i>
+                        </div>
+                        <div class="title">
+                            <h4>@lang('app.flexible')</h4>
+                        </div>
+                        <div class="desc">
+                            <p>@lang('app.flexible_desc')</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    <div class="why-choose-us-box">
+                        <div class="icon">
+                            <i class="fa fa-thumbs-up"></i>
+                        </div>
+                        <div class="title">
+                            <h4>@lang('app.easy')</h4>
+                        </div>
+                        <div class="desc">
+                            <p>@lang('app.easy_desc')</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="why-choose-us-box">
+                        <div class="icon">
+                            <i class="fa fa-gift"></i>
+                        </div>
+                        <div class="title">
+                            <h4>@lang('app.supports_reward')</h4>
+                        </div>
+                        <div class="desc">
+                            <p>@lang('app.supports_reward_desc')</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div> --}}
+
+        </div>
+    </section>
+
+    <section class="auth-form" >
+        <div class="container" style="padding-top: 70px">
             <div class="row">
                 <div class="col-md-8 offset-md-2">
                     <div class="card card-default">
-                        <div class="card-header text-center">@lang('app.contact_us')</div>
+                        <div class="card-header text-center">Hubungi Kami</div>
                         <div class="card-body">
 
                             @include('layouts.partials.alert')
 
 
-                            <form class="form-horizontal" role="form" method="POST" action="{{ route('contact_us') }}">
-                                {{ csrf_field() }}
-
-                                <div class="row mb-3 {{ $errors->has('name') ? ' is-invalid' : '' }}">
-                                    <label for="name" class="col-md-4 col-form-label">@lang('app.name') <span class="text-danger">*</span></label>
-
-                                    <div class="col-md-6">
-                                        <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
-                                        @if ($errors->has('name'))
-                                            <span class="help-block">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
-                                        @endif
-                                    </div>
-                                </div>
-
-                                <div class="row mb-3 {{ $errors->has('email') ? ' is-invalid' : '' }}">
-                                    <label for="email" class="col-md-4 col-form-label">@lang('app.email_address')  <span class="text-danger">*</span></label>
-
-                                    <div class="col-md-6">
-                                        <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
-                                        @if ($errors->has('email'))
-                                            <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                        @endif
-                                    </div>
-                                </div>
-
-                                <div class="row mb-3 {{ $errors->has('subject') ? ' is-invalid' : '' }}">
-                                    <label for="subject" class="col-md-4 col-form-label">@lang('app.subject')  <span class="text-danger">*</span></label>
-
-                                    <div class="col-md-6">
-                                        <input id="subject" type="subject" class="form-control" name="subject" value="{{ old('subject') }}" required>
-                                        @if ($errors->has('subject'))
-                                            <span class="help-block">
-                                        <strong>{{ $errors->first('subject') }}</strong>
-                                    </span>
-                                        @endif
-                                    </div>
-                                </div>
-
-                                <div class="row mb-3 {{ $errors->has('message') ? ' is-invalid' : '' }}">
-                                    <label for="message" class="col-md-4 col-form-label">@lang('app.message')</label>
-
-                                    <div class="col-md-6">
-                                        <textarea name="message" class="form-control" rows="7">{{ old('message') }}</textarea>
-                                        @if ($errors->has('message'))
-                                            <span class="help-block"><strong>{{ $errors->first('message') }}</strong></span>
-                                        @endif
-                                    </div>
-                                </div>
-
-                                <div class="row mb-3 {{ $errors->has('project_owner') ? ' is-invalid' : '' }}">
-                                    <div class="col-md-6 offset-md-4">
-                                        <label><input type="checkbox" name="project_owner" value="Project Owner" /> @lang('app.project_owner')</label>
-                                    </div>
-                                </div>
-
-                                <div class="row mb-3 {{ $errors->has('project_backer') ? ' is-invalid' : '' }}">
-                                    <div class="col-md-6 offset-md-4">
-                                        <label><input type="checkbox" name="project_backer" value="Project Backer" /> @lang('app.project_backer')</label>
-                                    </div>
-                                </div>
-
-                                <div class="row mb-3 {{ $errors->has('other') ? ' is-invalid' : '' }}">
-                                    <div class="col-md-6 offset-md-4">
-                                        <label><input type="checkbox" name="other" value="Other" /> @lang('app.other')</label>
-                                    </div>
-                                </div>
-
-                                @if(get_option('enable_recaptcha_contact_form') == 1)
-                                    <div class="row mb-3  {{ $errors->has('g-recaptcha-response') ? ' is-invalid' : '' }}">
-                                        <div class="col-md-6 offset-md-4">
-                                            <div class="g-recaptcha" data-sitekey="{{get_option('recaptcha_site_key')}}"></div>
-                                            @if ($errors->has('g-recaptcha-response'))
-                                                <span class="help-block">
-                                                    <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
-                                                </span>
-                                            @endif
-                                        </div>
-                                    </div>
-                                @endif
-
-                                <div class="row mb-3 ">
-                                    <div class="col-md-6 offset-md-4">
-                                        <button type="submit" class="btn btn-primary">
-                                            @lang('app.send_feedback')
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
+                            <form action="{{ route('csr') }}" method="POST">
+                            @csrf
+                            <div class="form-group">
+                                <label for="nama_pic">Nama PIC</label>
+                                <input type="text" class="form-control" id="nama_pic" name="nama_pic" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="no_pic">No PIC</label>
+                                <input type="no_pic" class="form-control" id="no_pic" name="no_pic" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="nama_perusahaan">Nama Perusahaan</label>
+                                <input type="nama_perusahaan" class="form-control" id="nama_perusahaan" name="nama_perusahaan" required>
+                            </div>                             
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" class="form-control" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="donasi">Estimasi Donasi</label>
+                                <input type="donasi" class="form-control" id="donasi" name="donasi" required>
+                            </div>                               
+                            <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Add</button>
+                        </form>
                         </div>
                     </div>
                 </div>

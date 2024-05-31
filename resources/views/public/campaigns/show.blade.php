@@ -28,7 +28,7 @@
 
         @include('public.campaigns.partials.header')
 
-        <div class="container">
+        <div class="container" >
             <div class="row">
                 <div class="col-md-8">
                     @include('layouts.partials.alert')
@@ -37,39 +37,45 @@
 
 
                         <div class="single-campaign-embeded">
+                           
 
+                            <div class="campaign-feature-img">
+                                <img src="{{$campaign->feature_img_url(true)}}" class="img-responsive" />
+                            </div>
 
-                            @if( ! empty($campaign->video))
-                                <?php
-                                $video_url = $campaign->video;
-                                if (strpos($video_url, 'youtube') > 0) {
-                                    preg_match("/^(?:http(?:s)?:\/\/)?(?:www\.)?(?:m\.)?(?:youtu\.be\/|youtube\.com\/(?:(?:watch)?\?(?:.*&)?v(?:i)?=|(?:embed|v|vi|user)\/))([^\?&\"'>]+)/", $video_url, $matches);
-                                    if ( ! empty($matches[1])){
-                                        echo '<div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" src="https://www.youtube.com/embed/'.$matches[1].'" frameborder="0" allowfullscreen></iframe></div>';
-                                    }
-
-                                } elseif (strpos($video_url, 'vimeo') > 0) {
-                                    if (preg_match('%^https?:\/\/(?:www\.|player\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|video\/|)(\d+)(?:$|\/|\?)(?:[?]?.*)$%im', $video_url, $regs)) {
-                                        if (!empty($regs[3])){
-                                            echo '<div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" src="https://player.vimeo.com/video/'.$regs[3].'" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>';
-                                        }
-                                    }
-                                }
-                                ?>
-
-                            @else
-
-                                <div class="campaign-feature-img">
-                                    <img src="{{$campaign->feature_img_url(true)}}" class="img-responsive" />
-                                </div>
-
-                            @endif
+                            
 
                         </div>
 
                         {!! safe_output($campaign->description) !!}
+                        <?php
+                        $video_url = $campaign->video;
 
-                        @if($enable_discuss)
+                        // Validasi apakah $video_url tidak kosong
+                        if (!empty($video_url)) {
+                            if (strpos($video_url, 'youtube') !== false) {
+                                preg_match("/(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/", $video_url, $matches);
+                                if (!empty($matches[1])) {
+                                    // Cek apakah video tersedia
+                                    $response = get_headers('https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=' . $matches[1]);
+                                    if (strpos($response[0], "200")) {
+                                        echo '<div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" src="https://www.youtube.com/embed/'.$matches[1].'" frameborder="0" allowfullscreen></iframe></div>';
+                                    } else {
+                                        echo "Video tidak tersedia";
+                                    }
+                                }
+                            } elseif (strpos($video_url, 'vimeo') !== false) {
+                                preg_match('/(?:https?:\/\/)?(?:www\.)?vimeo\.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|video\/|)(\d+)/', $video_url, $regs);
+                                if (!empty($regs[3])) {
+                                    echo '<div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" src="https://player.vimeo.com/video/'.$regs[3].'" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>';
+                                }
+                            } else {
+                                echo "URL video tidak valid";
+                            }
+                        }
+                        ?>
+
+                        {{-- @if($enable_discuss)
                             <div class="comments-title"><h2> <i class="fa fa-comment"></i> @lang('app.comments')</h2></div>
                             <div id="disqus_thread"></div>
                             <script>
@@ -86,7 +92,7 @@
                             </script>
                             <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 
-                        @endif
+                        @endif --}}
 
 
                     </div>

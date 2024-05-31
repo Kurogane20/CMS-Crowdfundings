@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Campaign;
 use App\Models\Payment;
 use App\Models\User;
+use App\Models\PageView;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,7 +21,7 @@ class DashboardController extends Controller
         $pending_campaign_count = Campaign::pending()->count();
         $blocked_campaign_count = Campaign::blocked()->count();
         $active_campaign_count = Campaign::active()->count();
-        
+        $pageViews = PageView::orderByDesc('count')->take(10)->get();        
         $payment_created = Payment::success()->count();
         $payment_amount = Payment::success()->sum('amount');
 
@@ -39,6 +40,6 @@ class DashboardController extends Controller
         }
 
 
-        return view('dashboard.dashboard', compact('title','user_count', 'active_campaign_count', 'pending_campaign_count', 'blocked_campaign_count', 'payment_created', 'payment_amount','pending_payment_amount', 'pending_campaigns', 'last_payments'));
+        return view('dashboard.dashboard', compact('title','user_count', 'active_campaign_count', 'pending_campaign_count', 'blocked_campaign_count', 'payment_created', 'payment_amount','pending_payment_amount', 'pending_campaigns', 'last_payments', 'pageViews'));
     }
 }

@@ -10,6 +10,8 @@
                 <img src="{{ $user->get_gravatar(100) }}" class="img-thumbnail img-circle" width="100" />
             </div>
 
+            
+
             <table class="table table-bordered table-striped">
 
                 <tr>

@@ -34,8 +34,8 @@ Route::group(['prefix'=>'ajax'], function() {
 });
 
 // Contact Us
-Route::get('contact-us', ['as' => 'contact_us', 'uses' => 'Public\HomeController@contactUs']);
-Route::post('contact-us', ['as' => 'contact_us', 'uses' => 'Public\HomeController@contactUsPost']);
+Route::get('csr', ['as' => 'csr', 'uses' => 'Public\HomeController@csr']);
+Route::post('csr', ['as' => 'csr', 'uses' => 'Public\HomeController@csrpost']);
 
 // categories
 Route::get('search', ['as' => 'search', 'uses' => 'Public\CategoriesController@search']);
@@ -47,6 +47,10 @@ Route::any('add-to-cart/{reward_id?}', ['as' => 'add_to_cart', 'uses' => 'Public
 Route::get('checkout', ['as' => 'checkout', 'uses' => 'Public\CheckoutController@checkout']);
 Route::post('checkout', ['uses' => 'Public\CheckoutController@checkoutPost']);
 Route::post('checkout/bank-transfer', ['as' => 'bank_transfer_submit', 'uses' => 'Public\CheckoutController@paymentBankTransferReceive']);
+Route::get('checkout/bsi-payment', ['as' => 'bsi_payment', 'uses' => 'Public\CheckoutController@mandiriPaymentPage']);
+Route::get('checkout/muamalat-payment', ['as' => 'muamalat_payment', 'uses' => 'Public\CheckoutController@muamalatPaymentPage']);
+// Route::get('/bsi-payment', 'CheckoutController@mandiriPaymentPage')->name('bsi_payment_page');
+// Route::get('/muamalat-payment', 'CheckoutController@muamalatPaymentPage')->name('muamalat_payment_page');
 
 // Social Logins
 Route::group(['prefix'=>'login'], function(){
@@ -90,7 +94,8 @@ Route::group(['prefix'=>'dashboard', 'middleware' => 'auth'], function() {
         Route::post('edit_campaign/{id}/updates', [ 'uses' => 'Dashboard\UpdateController@store']);
 
         Route::get('edit_campaign/{id}/updates/update/{update_id}', ['as'=>'update_update', 'uses' => 'Dashboard\UpdateController@edit']);
-        Route::post('edit_campaign/{id}/updates/update/{update_id}', [ 'uses' => 'Dashboard\UpdateController@update']);
+        // Route::post('edit_campaign/{id}/updates/update/{update_id}', [ 'uses' => 'Dashboard\UpdateController@update']);
+        Route::put('edit_campaign/{id}/updates/update/{update_id}', 'Dashboard\UpdateController@update')->name('update_update');
         Route::post('delete_update', ['as' => 'delete_update', 'uses' => 'Dashboard\UpdateController@destroy']);
         
         //Faq
@@ -210,6 +215,8 @@ Route::group(['prefix'=>'dashboard', 'middleware' => ['admin','auth']], function
         Route::get('user_status/{id}/{status}', ['as'=>'user_status', 'uses' => 'Admin\UserController@statusChange']);
         Route::get('edit/{id}', ['as'=>'users_edit', 'uses' => 'Admin\UserController@edit']);
         Route::post('edit/{id}', ['uses' => 'Admin\UserController@update']);
+        Route::post('create', ['as'=>'create_new_user', 'uses' => 'Admin\UserController@store']);
+        
 
         // not yet
         //Route::get('profile/change-avatar/{id}', ['as'=>'change_avatar', 'uses' => 'UserController@changeAvatar']);
