@@ -9,39 +9,45 @@
     <div class="row">
         <div class="col-sm-8 offset-sm-2 col-xs-12">
 
-            <form action="" class="form-horizontal" method="post" enctype="multipart/form-data" >                                @csrf
-
-
-            <div class="row mb-3 {{ $errors->has('title')? 'is-invalid':'' }}">
-                <label for="title" class="col-sm-4 col-form-label">@lang('app.title')</label>
-                <div class="col-sm-8">
-                    <input type="text" class="form-control" id="title" value="{{ old('title') }}" name="title" placeholder="@lang('app.title')">
-                    {!! $errors->has('title')? '<p class="help-block">'.$errors->first('title').'</p>':'' !!}
+            <form action="" class="form-horizontal" method="post" enctype="multipart/form-data">
+                @csrf
+                <div class="row mb-3 {{ $errors->has('title')? 'is-invalid':'' }}">
+                    <label for="title" class="col-sm-4 col-form-label">@lang('app.title')</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="title" value="{{ old('title') }}" name="title" placeholder="@lang('app.title')">
+                        {!! $errors->has('title')? '<p class="help-block">'.$errors->first('title').'</p>':'' !!}
+                    </div>
                 </div>
-            </div>
 
-            <div class="row mb-3 {{ $errors->has('description')? 'is-invalid':'' }}">
-                <label for="description" class="col-sm-4 col-form-label">@lang('app.description')</label>
-                <div class="col-sm-8">
-                    <textarea class="form-control" name="description">{{old('description')}}</textarea>
-                    {!! $errors->has('description')? '<p class="help-block">'.$errors->first('description').'</p>':'' !!}
+                <div class="row mb-3 {{ $errors->has('description')? 'is-invalid':'' }}">
+                    <label for="description" class="col-sm-4 col-form-label">@lang('app.description')</label>
+                    <div class="col-sm-8">
+                        <textarea class="form-control" name="description" rows="6">{{old('description')}}</textarea>
+                        {!! $errors->has('description')? '<p class="help-block">'.$errors->first('description').'</p>':'' !!}
+                    </div>
                 </div>
-            </div>
 
-            <div class="row mb-3 {{ $errors->has('image')? 'is-invalid':'' }}">
-                <label for="image" class="col-sm-4 col-form-label">@lang('app.image')</label>
-                <div class="col-sm-8">
-                    <input type="file" class="form-control" id="image" name="image" placeholder="@lang('app.image')">
-                    {!! $errors->has('image')? '<p class="help-block">'.$errors->first('image').'</p>':'' !!}
+                <div class="row mb-3 {{ $errors->has('images')? 'is-invalid':'' }}">
+                    <label for="images" class="col-sm-4 col-form-label">@lang('app.images')</label>
+                    <div class="col-sm-8">
+                        <input type="file" class="form-control" id="images" name="images[]" multiple placeholder="@lang('app.images')">
+                        {!! $errors->has('images')? '<p class="help-block">'.$errors->first('images').'</p>':'' !!}
+                    </div>
                 </div>
-            </div> 
+
+                <div class="row mb-3">
+                    <div class="col-sm-offset-4 col-sm-8">
+                        <button type="submit" class="btn btn-primary">@lang('app.save_update')</button>
+                    </div>
+                </div>
+            </form>
 
 
-            <div class="row mb-3">
+            {{-- <div class="row mb-3">
                 <div class="col-sm-offset-4 col-sm-8">
                     <button type="submit" class="btn btn-primary">@lang('app.save_update')</button>
                 </div>
-            </div>
+            </div> --}}
             </form>
 
         </div>
@@ -63,7 +69,15 @@
                             <td> {{ $update->title }}  </td>
                             <td> {{ $update->description }}  </td>
                             {{-- <td> <img src="{{ uploaded_asset($update->image) }}" width="100" /> </td> --}}
-                            <td> <img src="{{$update->get_image_url()}}" height="100" class="img-responsive" />  </td>
+                            <td>
+                                @if(is_array($update->getImageUrls()) && count($update->getImageUrls()) > 0)
+                                    @foreach($update->getImageUrls() as $imageUrl)
+                                        <img src="{{ $imageUrl }}" height="100" class="img-responsive" style="margin: 5px;" />
+                                    @endforeach
+                                @else
+                                    <p>No images available</p>
+                                @endif
+                            </td>
                             <td width="100">
                                 <a href="{{ route('update_update', [$update->campaign_id,$update->id]) }}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> </a>
                                 <a href="javascript:;" class="btn btn-danger btn-xs" data-id="{{ $update->id }}"><i class="fa fa-trash"></i> </a>

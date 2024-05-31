@@ -40,41 +40,44 @@ class UpdateController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $id)
+   public function store(Request $request, $id)
     {
         $request->validate([
             'title' => 'required',
             'description' => 'required',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ], [
-            'image.image' => 'Only .jpg, .jpeg and .png is allowed extension',
+            'images.*.image' => 'Only .jpg, .jpeg and .png is allowed extension',
         ]);
 
-        $data = $request->except('_token');
+        $data = $request->except('_token', 'images');
         $data['user_id'] = $request->user()->id;
         $data['campaign_id'] = $id;
 
-        $image_name = '';
-        if ($image = $request->file('image')) {
-            $valid_extensions = ['jpg', 'jpeg', 'png'];
-            $extension = strtolower($image->getClientOriginalExtension());
-            if (!in_array($extension, $valid_extensions)) {
-                return redirect()->back()->withInput($request->input())->with('error', 'Only .jpg, .jpeg and .png is allowed extension');
+        $image_names = [];
+        if ($images = $request->file('images')) {
+            foreach ($images as $image) {
+                $valid_extensions = ['jpg', 'jpeg', 'png'];
+                $extension = strtolower($image->getClientOriginalExtension());
+                if (!in_array($extension, $valid_extensions)) {
+                    return redirect()->back()->withInput($request->input())->with('error', 'Only .jpg, .jpeg and .png is allowed extension');
+                }
+
+                $upload_dir = './storage/uploads/updates/';
+                if (!file_exists($upload_dir)) {
+                    mkdir($upload_dir, 0777, true);
+                }
+
+                $file_base_name = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+                $image_name = strtolower(time().str_random(5).'-'.str_slug($file_base_name)).'.'.$extension;
+                $imageFileName = $upload_dir.$image_name;
+
+                Image::make($image)->resize(900, 400)->save($imageFileName);
+                $image_names[] = $image_name;
             }
-
-            $upload_dir = './storage/uploads/updates/';
-            if (!file_exists($upload_dir)) {
-                mkdir($upload_dir, 0777, true);
-            }
-
-            $file_base_name = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
-            $image_name = strtolower(time().str_random(5).'-'.str_slug($file_base_name)).'.'.$extension;
-            $imageFileName = $upload_dir.$image_name;
-
-            Image::make($image)->resize(900, 400)->save($imageFileName);
         }
 
-        $data['image'] = $image_name;
+        $data['images'] = $image_names;
 
         if (Update::create($data)) {
             return back()->with('success', trans('app.update_created'));
@@ -127,54 +130,68 @@ class UpdateController extends Controller
      */
     public function update(Request $request, $campaign_id, $update_id)
     {
-        // Define the validation rules for the request data
-        $rules = [
-            'title'       => 'required',     // The title field is required
-            'description' => 'required',     // The description field is required
-            'image'       => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',    // The image field is optional, must be an image file, and the file format must be jpeg, png, jpg, or gif. The file size must not exceed 2048 kilobytes
-        ];
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ], [
+            'images.*.image' => 'Only .jpg, .jpeg and .png are allowed extensions',
+        ]);
 
-        // Validate the request data against the defined rules
-        $request->validate($rules);
+        $update = Update::findOrFail($update_id);
+        $update->title = $request->input('title');
+        $update->description = $request->input('description');
 
-        // Extract the data from the request except the `_token` field
-        $data = $request->except('_token');
+        // Handle existing images
+        $existingImages = $update->images ?: [];
+        $deleteImages = $request->input('delete_images', []);
 
-        // Process the image if present
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $valid_extensions = ['jpg', 'jpeg', 'png'];
-            $extension = strtolower($image->getClientOriginalExtension());
-            if (!in_array($extension, $valid_extensions)) {
-                return redirect()->back()->withInput($request->input())->with('error', 'Only .jpg, .jpeg and .png is allowed extension');
+        // Filter out images marked for deletion
+        $existingImages = is_string($existingImages) ? json_decode($existingImages, true) : $existingImages;
+        $existingImages = array_filter($existingImages, function($image) use ($deleteImages) {
+            return !in_array($image, $deleteImages);
+        });
+
+        // Handle new image uploads
+        $newImages = [];
+
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $image) {
+                $extension = strtolower($image->getClientOriginalExtension());
+                $validExtensions = ['jpg', 'jpeg', 'png'];
+
+                if (!in_array($extension, $validExtensions)) {
+                    return redirect()->back()->withInput($request->input())->with('error', 'Only .jpg, .jpeg and .png are allowed extensions');
+                }
+
+                $uploadDir = 'storage/uploads/updates/';
+                if (!file_exists($uploadDir)) {
+                    mkdir($uploadDir, 0777, true);
+                }
+
+                $fileBaseName = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+                $imageName = strtolower(time() . str_random(5) . '-' . str_slug($fileBaseName)) . '.' . $extension;
+                $imageFileName = $uploadDir . $imageName;
+
+                Image::make($image)->resize(900, 400)->save(public_path($imageFileName));
+
+                $newImages[] = $imageName;
             }
-
-            $upload_dir = './storage/uploads/updates/';
-            if (!file_exists($upload_dir)) {
-                mkdir($upload_dir, 0777, true);
-            }
-
-            $image_name = strtolower(time().str_random(5).'-'.str_slug($image->getClientOriginalName())).'.'.$extension;
-            $imageFileName = $upload_dir.$image_name;
-
-            Image::make($image)->resize(900, 400)->save($imageFileName);
-
-            $data['image'] = $image_name;
         }
 
-        // Update the update in the database
-        if (Update::where('id', $update_id)
-            ->where('user_id', $request->user()->id)
-            ->where('campaign_id', $campaign_id)
-            ->update($data)
-        ) {
-            // If the update is successfully updated, redirect the user to the edit campaign updates page with a success message
+        // Merge new images with existing images
+        $allImages = array_merge($existingImages, $newImages);
+
+        // Save all images as JSON
+        $update->images = json_encode($allImages);
+
+        if ($update->save()) {
             return redirect(route('edit_campaign_updates', $campaign_id))->with('success', trans('app.update_updated'));
         }
 
-        // If the update fails to update, return a redirect back to the previous page with an error message and the input data
-        return back()->with('error', trans('app.something_went_wrong'))->withInput($request->input());
+        return redirect()->back()->with('error', 'Something went wrong')->withInput($request->input());
     }
+
 
     /**
      * Remove the specified resource from storage.

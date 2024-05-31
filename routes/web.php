@@ -94,7 +94,8 @@ Route::group(['prefix'=>'dashboard', 'middleware' => 'auth'], function() {
         Route::post('edit_campaign/{id}/updates', [ 'uses' => 'Dashboard\UpdateController@store']);
 
         Route::get('edit_campaign/{id}/updates/update/{update_id}', ['as'=>'update_update', 'uses' => 'Dashboard\UpdateController@edit']);
-        Route::post('edit_campaign/{id}/updates/update/{update_id}', [ 'uses' => 'Dashboard\UpdateController@update']);
+        // Route::post('edit_campaign/{id}/updates/update/{update_id}', [ 'uses' => 'Dashboard\UpdateController@update']);
+        Route::put('edit_campaign/{id}/updates/update/{update_id}', 'Dashboard\UpdateController@update')->name('update_update');
         Route::post('delete_update', ['as' => 'delete_update', 'uses' => 'Dashboard\UpdateController@destroy']);
         
         //Faq

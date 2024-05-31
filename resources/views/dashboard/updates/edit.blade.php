@@ -2,44 +2,46 @@
 @section('title') @if( ! empty($title)) {{ $title }} | @endif @parent @endsection
 
 @section('content')
-
     <div class="row">
-        <div class="col-sm-8 offset-sm-1 col-xs-12">
+        <div class="col-sm-8 offset-sm-2 col-xs-12">
 
-            <form action="" class="form-horizontal" method="post" enctype="multipart/form-data" >                                @csrf
-
-            <div class="row mb-3 {{ $errors->has('title')? 'is-invalid':'' }}">
-                <label for="title" class="col-sm-4 col-form-label">@lang('app.title')</label>
-                <div class="col-sm-8">
-                    <input type="text" class="form-control" id="title" value="{{ $update->title }}" name="title" placeholder="@lang('app.title')">
-                    {!! $errors->has('title')? '<p class="help-block">'.$errors->first('title').'</p>':'' !!}
+            <form action="{{ route('update_update', [$campaign->id, $update->id]) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+                
+                <div class="form-group">
+                    <label for="title">@lang('app.title')</label>
+                    <input type="text" name="title" id="title" class="form-control" value="{{ $update->title }}" required>
                 </div>
-            </div>
-
-            <div class="row mb-3 {{ $errors->has('description')? 'is-invalid':'' }}">
-                <label for="description" class="col-sm-4 col-form-label">@lang('app.description')</label>
-                <div class="col-sm-8">
-                    <textarea class="form-control" name="description">{{$update->description}}</textarea>
-                    {!! $errors->has('description')? '<p class="help-block">'.$errors->first('description').'</p>':'' !!}
+                
+                <div class="form-group">
+                    <label for="description">@lang('app.description')</label>
+                    <textarea name="description" id="description" class="form-control" required>{{ $update->description }}</textarea>
                 </div>
-            </div>
-            <div class="row mb-3 {{ $errors->has('image')? 'is-invalid':'' }}">
-                <label for="image" class="col-sm-4 col-form-label">@lang('app.image')</label>
-                <div class="col-sm-8">
-                    <input type="file" class="form-control" id="image" name="image" placeholder="@lang('app.image')">
-                    {!! $errors->has('image')? '<p class="help-block">'.$errors->first('image').'</p>':'' !!}
-                </div>
-            </div> 
 
-
-            <div class="row mb-3">
-                <div class="offset-sm-4 col-sm-8">
-                    <button type="submit" class="btn btn-primary">@lang('app.save_update')</button>
+                <div class="form-group">
+                    <label>@lang('app.current_images')</label>
+                    <div class="row">
+                        @foreach($update->getImageUrls() as $imageUrl)
+                            <div class="col-md-3">
+                                <img src="{{ $imageUrl }}" height="100" class="img-responsive" style="margin: 5px;" />
+                                <label>
+                                    <input type="checkbox" name="delete_images[]" value="{{ basename($imageUrl) }}"> @lang('app.delete')
+                                </label>
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
-            </div>
+                
+                <div class="form-group">
+                    <label for="images">@lang('app.new_images')</label>
+                    <input type="file" name="images[]" id="images" class="form-control" multiple>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">@lang('app.update')</button>
             </form>
 
-        </div>
 
+        </div>
     </div>
 @endsection
