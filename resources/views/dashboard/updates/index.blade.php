@@ -28,7 +28,7 @@
                 </div>
 
                 <div class="row mb-3 {{ $errors->has('images')? 'is-invalid':'' }}">
-                    <label for="images" class="col-sm-4 col-form-label">@lang('app.images')</label>
+                    <label for="images" class="col-sm-4 col-form-label">Images</label>
                     <div class="col-sm-8">
                         <input type="file" class="form-control" id="images" name="images[]" multiple placeholder="@lang('app.images')">
                         {!! $errors->has('images')? '<p class="help-block">'.$errors->first('images').'</p>':'' !!}
