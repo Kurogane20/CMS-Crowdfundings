@@ -16,7 +16,7 @@
                 
                 <div class="form-group">
                     <label for="description">@lang('app.description')</label>
-                    <textarea name="description" id="description" class="form-control" required>{{ $update->description }}</textarea>
+                    <textarea name="description" id="description" rows="10" class="form-control" required>{{ $update->description }}</textarea>
                 </div>
 
                 <div class="form-group">
