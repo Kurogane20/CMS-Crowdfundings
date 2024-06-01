@@ -20,7 +20,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label>@lang('app.current_images')</label>
+                    <label>Images</label>
                     <div class="row">
                         @foreach($update->getImageUrls() as $imageUrl)
                             <div class="col-md-3">
@@ -34,7 +34,7 @@
                 </div>
                 
                 <div class="form-group">
-                    <label for="images">@lang('app.new_images')</label>
+                    <label for="images">New Images</label>
                     <input type="file" name="images[]" id="images" class="form-control" multiple>
                 </div>
                 
