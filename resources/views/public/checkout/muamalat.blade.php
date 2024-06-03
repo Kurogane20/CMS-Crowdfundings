@@ -59,7 +59,8 @@
 
                                 <div id="bankTransferStatus"></div>
 
-                                <form action="{{route('bank_transfer_submit')}}" id="bankTransferForm" class="payment-form" method="post" enctype="multipart/form-data" > @csrf                                            
+                                <form action="{{route('bank_transfer_submit')}}" id="bankTransferForm" class="payment-form" method="post" enctype="multipart/form-data" > 
+                                    @csrf                                            
 
                                     {{-- <div class="row mb-3 {{ $errors->has('account_number')? 'is-invalid':'' }}">
                                         <label for="account_number" class="col-sm-4 col-form-label">Nomor Rekening<span class="field-required">*</span></label>
@@ -84,7 +85,7 @@
                                             {!! $errors->has('bukti_pembayaran') ? '<p class="help-block">'.$errors->first('bukti_pembayaran').'</p>' : '' !!}
                                         </div>
                                     </div>
-                                    
+                                    <input type="hidden" name="bank" id="bank" value="Bank Muamalat Indonesia">
                                     <div class="row mb-3">
                                         <div class="offset-sm-4 col-sm-8">
                                             <button type="submit" class="btn btn-primary" style="background-color:rgb(2, 95, 2); border: none">Konfirmasi Pembayaran</button>

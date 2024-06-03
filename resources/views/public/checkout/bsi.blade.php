@@ -83,6 +83,7 @@
                                             {!! $errors->has('bukti_pembayaran') ? '<p class="help-block">'.$errors->first('bukti_pembayaran').'</p>' : '' !!}
                                         </div>
                                     </div>
+                                    <input type="hidden" name="bank" id="bank" value="Bank Syariah Indonesia">
                                     
                                     <div class="row mb-3">
                                         <div class="offset-sm-4 col-sm-8">

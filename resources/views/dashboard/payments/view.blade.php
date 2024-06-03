@@ -51,7 +51,7 @@
 
         <tr>
             <th>@lang('app.method')</th>
-            <td>{{$payment->payment_method}}</td>
+            <td>{{$payment->bank}}</td>
         </tr>
 
         <tr>

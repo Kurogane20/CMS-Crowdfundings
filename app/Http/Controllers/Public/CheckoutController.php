@@ -209,7 +209,8 @@ class CheckoutController extends Controller
             'branch_address'    => $request->branch_address,
             'account_name'      => $request->account_name,
             'iban'              => $request->iban,
-            'bukti_pembayaran'  => $image_name            
+            'bukti_pembayaran'  => $image_name,
+            'bank'              => $request->bank,            
         ];
         
          

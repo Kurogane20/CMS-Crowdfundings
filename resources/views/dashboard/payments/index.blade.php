@@ -56,7 +56,7 @@
                     <td>{{$payment->name}}</td>
                     <td><a href="{{route('payment_view', $payment->id)}}"> {{$payment->phone}} </a></td>
                     <td>{!! get_amount_raw($payment->amount) !!}</td>
-                    <td>{{$payment->payment_method}}</td>
+                    <td>{{$payment->bank}}</td>
                     <td style="width: 200px"><span data-toggle="tooltip" title="{{$payment->created_at->format('d-m-Y, H:i:s')}}">{{$payment->created_at->format('d-m-Y, H:i:s')}}</span></td>
 
                     <td>
