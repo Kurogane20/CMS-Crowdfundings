@@ -31,7 +31,7 @@
                                             @endif
 
                                             @if ($imageIndex < $imageCount && (($index + 1) % 2 == 0)) 
-                                                <div class="update-image-container">
+                                                <div class="update-image-container" style="text-align: center;margin-top: 20px; margin-bottom: 20px">
                                                     <img src="{{ $imageUrls[$imageIndex] }}" class="img-fluid" />
                                                 </div>
                                                 @php $imageIndex++; @endphp
@@ -42,7 +42,7 @@
                                     @if($imageIndex < $imageCount) 
                                         <div class="update-images">
                                             @while($imageIndex < $imageCount)
-                                                <div class="update-image-container" style="text-align: center;">
+                                                <div class="update-image-container" style="text-align: center;margin-top: 20px; margin-bottom: 20px">
                                                     <img src="{{ $imageUrls[$imageIndex] }}" class="img-fluid" style="max-width: 100%; height: auto;" />
                                                 </div>
                                                 @php $imageIndex++; @endphp
