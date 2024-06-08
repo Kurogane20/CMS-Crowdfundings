@@ -103,7 +103,8 @@
                             </div>
                             <div class="form-group">
                                 <label for="donasi">Estimasi Donasi</label>
-                                <input type="donasi" class="form-control" id="donasi" name="donasi" required>
+                                <input type="text" class="form-control rupiah-currency" id="donasi" name="donasi_display" required data-type="currency" placeholder="">
+                                <input type="hidden" id="donasi_hidden" name="donasi">
                             </div>                               
                             <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Add</button>
                         </form>
@@ -118,3 +119,25 @@
 @if(get_option('enable_recaptcha_contact_form') == 1)
     <script src='https://www.google.com/recaptcha/api.js'></script>
 @endif
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var rupiahCurrencyInputs = document.querySelectorAll('.rupiah-currency');
+        var hiddenInput = document.getElementById('donasi_hidden');
+
+        rupiahCurrencyInputs.forEach(function(input) {
+            input.addEventListener('input', function() {
+                var amount = parseInt(this.value.replace(/[^\d]/g, ''));
+                this.value = formatRupiah(amount);
+                hiddenInput.value = amount;
+            });
+        });
+    });
+
+    function formatRupiah(angka) {
+        var reverse = angka.toString().split('').reverse().join('');
+        var ribuan = reverse.match(/\d{1,3}/g);
+        ribuan = ribuan.join('.').split('').reverse().join('');
+        return ribuan;
+    }
+</script>

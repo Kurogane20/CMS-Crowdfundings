@@ -59,7 +59,7 @@
                                     // Cek apakah video tersedia
                                     $response = get_headers('https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=' . $matches[1]);
                                     if (strpos($response[0], "200")) {
-                                        echo '<div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" src="https://www.youtube.com/embed/'.$matches[1].'" frameborder="0" allowfullscreen></iframe></div>';
+                                        echo '<div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" style="width:100%;height:500px;" src="https://www.youtube.com/embed/'.$matches[1].'" frameborder="0" allowfullscreen></iframe></div>';
                                     } else {
                                         echo "Video tidak tersedia";
                                     }
@@ -67,7 +67,7 @@
                             } elseif (strpos($video_url, 'vimeo') !== false) {
                                 preg_match('/(?:https?:\/\/)?(?:www\.)?vimeo\.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|video\/|)(\d+)/', $video_url, $regs);
                                 if (!empty($regs[3])) {
-                                    echo '<div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" src="https://player.vimeo.com/video/'.$regs[3].'" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>';
+                                    echo '<div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" style="width:100%;height:500px;" src="https://player.vimeo.com/video/'.$regs[3].'" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>';
                                 }
                             } else {
                                 echo "URL video tidak valid";
