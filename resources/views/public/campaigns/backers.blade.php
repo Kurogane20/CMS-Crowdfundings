@@ -21,8 +21,8 @@
                         @if($backers->count())
                             <table class="table table-bordered table-striped">
                                 <tr>
-                                    <th>@lang('app.backer_name')</th>
-                                    <th>@lang('app.amount')</th>
+                                    <th>Nama Donatur</th>
+                                    <th>Jumlah</th>
                                 </tr>
 
                                 @if($backers->count() > 0)

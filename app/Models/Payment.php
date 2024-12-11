@@ -25,4 +25,13 @@ class Payment extends Model
     public function scopePending($query){
         return $query->whereStatus('pending');
     }
+
+    public function get_image_url(){
+        if ($this->bukti_pembayaran){
+            $img_url = url('/storage/uploads/bukti_pembayaran/'.$this->bukti_pembayaran);
+        }else{
+            $img_url = asset('assets/images/placeholder.png');
+        }
+        return $img_url;
+    }
 }

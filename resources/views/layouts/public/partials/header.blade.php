@@ -1,6 +1,6 @@
 
 
-    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm fixed-top">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
                 @if(get_option('logo_settings') == 'show_site_name')
@@ -28,21 +28,25 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('single_page', $page->slug) }}">{{ $page->title }} </a>
                             </li>
-                        @endforeach
+                        @endforeach                        
                     @endif
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('csr')}}"> @lang('app.contact_us')</a>
+                    </li>
                 </ul>
                 <form action="{{route('search')}}" method="get">
-                    <input class="form-control" type="text" name="q" placeholder="@lang('app.search_campaigns')" aria-label="@lang('app.search_campaigns')">
+                    <input class="form-control" type="text" name="q" placeholder="Cari donasi" aria-label="@lang('app.search_campaigns')">
                 </form>
 
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ms-auto">
-                    
-                    <li class="nav-item">
-                        <a href="{{route('start_campaign')}}" class=" btn btn-filled">
-                            @lang('app.start_a_campaign')
-                        </a>
-                    </li>
+                    <?php if (auth()->check() && auth()->user()->user_type == 'admin'): ?>
+                        <li class="nav-item">
+                            <a href="{{route('start_campaign')}}" class=" btn btn-filled">
+                                @lang('app.start_a_campaign')
+                            </a>
+                        </li>
+                    <?php endif; ?>
                     <!-- Authentication Links -->
                     @guest
                         @if (Route::has('login'))

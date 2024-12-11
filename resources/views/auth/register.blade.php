@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container py-3">
-    <div class="row justify-content-center">
+    <div class="row justify-content-center" style="padding-top: 70px">
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">@lang('app.register')</div>

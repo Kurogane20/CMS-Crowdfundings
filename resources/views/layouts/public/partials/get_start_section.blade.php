@@ -8,7 +8,9 @@
                     <p class="sub-title"> @lang('app.discover_desc') </p>
                     <div class="get-start-buttons">
                         <a href="{{route('browse_categories')}}" class="btn btn-outline">@lang('app.discover')</a>
-                        <a href="{{route('start_campaign')}}" class="btn btn-filled">@lang('app.start_a_campaign')</a>
+                        <?php if (auth()->check() && auth()->user()->user_type == 'admin'): ?>
+                            <a href="{{route('start_campaign')}}" class="btn btn-filled">@lang('app.start_a_campaign')</a>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>

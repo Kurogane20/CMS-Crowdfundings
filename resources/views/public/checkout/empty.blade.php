@@ -3,7 +3,7 @@
 
 @section('content')
 
-    <section class="checkout-empty">
+    <section class="checkout-empty" style="padding-top: 70px">
 
 
         <div class="container">

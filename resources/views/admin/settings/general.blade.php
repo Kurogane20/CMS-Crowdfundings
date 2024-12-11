@@ -130,7 +130,7 @@
                     </div>
                 </div>
 
-                <legend>@lang('app.disqus_comment')</legend>
+                {{-- <legend>@lang('app.disqus_comment')</legend>
 
                 <div class="row mb-3 {{ $errors->has('enable_disqus_comment')? 'is-invalid':'' }}">
                     <label class="col-md-4 col-form-label">@lang('app.enable_disable') </label>
@@ -148,7 +148,7 @@
                         <input type="text" class="form-control" id="disqus_shortname" value="{{ get_option('disqus_shortname') }}" name="disqus_shortname" placeholder="@lang('app.disqus_shortname')">
                         <p class="text-info">@lang('app.disqus_shortname_help_text') </p>
                     </div>
-                </div>
+                </div> --}}
 
 
                 <legend>@lang('app.cookie_settings')</legend>

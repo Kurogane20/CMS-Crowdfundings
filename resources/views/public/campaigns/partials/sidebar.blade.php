@@ -1,6 +1,6 @@
 <div class="single-donate-wrap">
 
-    <h3 class="campaign-single-sub-title">{{$campaign->short_description}}</h3>
+    {{-- <h3 class="campaign-single-sub-title">{{$campaign->short_description}}</h3> --}}
 
     @if($campaign->user)
         <div class="single-author-box">
@@ -16,7 +16,7 @@
     @endif
 
     <div class="campaign-progress-info">
-        <h4>{!! get_amount($campaign->total_raised()) !!} <small>@lang('app.raised_of') {!! get_amount($campaign->goal) !!} @lang('app.goal')</small></h4>
+        <a>{!! get_amount($campaign->total_raised()) !!} dari target {!! get_amount($campaign->goal) !!} @lang('app.goal')</a>
 	
         <div class="progress">
             @php
@@ -28,8 +28,8 @@
         </div>
 
         <ul>
-            <li><strong>{{$campaign->days_left()}}</strong> @lang('app.days_left')</li>
-            <li><strong>{{$campaign->total_payments}}</strong> @lang('app.backers')</li>
+            <li><strong>{{$campaign->days_left()}}</strong> hari lagi</li>
+            <li><strong>{{$campaign->total_payments}}</strong> Donatur</li>
         </ul>
     </div>
 
@@ -67,33 +67,32 @@
 
     <div class="donate_form">
 
-        <h2>@lang('app.donate')</h2>
+        <h2>Donasi</h2>
 
         @if( ! $is_ended)
 
-            <form action="{{route('add_to_cart')}}" class="form-horizontal" method="post" > @csrf
-
+           <form action="{{route('add_to_cart')}}" class="form-horizontal" method="post">
+                @csrf
                 <input type="hidden" name="campaign_id" value="{{$campaign->id}}" />
-                <div class="donate_amount_field">
+               <div class="donate_amount_field">
                     <div class="donate_currency">{!! get_currency_symbol(get_option('currency_sign')) !!}</div>
-                    <input type="number" step="1" min="1" name="amount" class="form-control" value="{!! get_amount_raw($campaign->recommended_amount) !!}" style="text-indent: 10px;" placeholder="@lang('app.enter_amount')" />
-                </div>
+                    <input type="text" id="donation_amount_display" step="1" min="1" class="form-control" style="text-indent: 10px;" placeholder="Masukkan donasi" required />
+                    <input type="hidden" id="donation_amount" name="amount" />
+                </div>               
 
-                @if($campaign->amount_prefilled())
-                    <div class="donate-amount-placeholder">
-                        <ul>
-                            @foreach($campaign->amount_prefilled() as $amount_prefield)
-                                <li data-value="{{$amount_prefield}}">{!! get_amount($amount_prefield) !!}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-
+                <div class="amount-buttons">
+                    <button type="button" class="btn btn-amount" data-amount="10000" >Rp 10,000</button>
+                    <button type="button" class="btn btn-amount" data-amount="50000">Rp 50,000</button>
+                    <button type="button" class="btn btn-amount" data-amount="100000">Rp 100,000</button>
+                    <button type="button" class="btn btn-amount" data-amount="200000">Rp 200,000</button>
+                    <!-- Tambahkan tombol lain sesuai kebutuhan -->
+                </div> 
+                
                 <div class="donate-form-button">
-                    <button type="submit" class="btn btn-filled btn-block btn-lg">@lang('app.donate')</button>
+                    <button type="submit" class="btn btn-filled">Donasi Sekarang</button>
                 </div>
             </form>
-
+   
         @else
             <div class="alert alert-warning">
                 <h5>@lang('app.campaign_has_been_ended')</h5>
@@ -136,3 +135,45 @@
     @endif
 
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Mengatur nilai input jumlah donasi berdasarkan tombol yang diklik
+        var amountButtons = document.querySelectorAll('.btn-amount');
+        amountButtons.forEach(function(button) {
+            button.addEventListener('click', function() {
+                var amount = parseInt(this.getAttribute('data-amount'));
+                document.getElementById('donation_amount_display').value = formatRupiah(amount);
+                document.getElementById('donation_amount').value = amount;
+            });
+        });
+
+        // Fungsi untuk mengubah angka menjadi format uang rupiah
+        function formatRupiah(angka) {
+            var reverse = angka.toString().split('').reverse().join(''),
+                ribuan = reverse.match(/\d{1,3}/g);
+            ribuan = ribuan.join(',').split('').reverse().join('');
+            return ribuan;
+        }
+
+        // Mengubah input menjadi format uang rupiah saat memasukkan manual
+        document.getElementById('donation_amount_display').addEventListener('input', function (e) {
+            var amount = parseInt(this.value.replace(/[^\d]/g, ''));
+            this.value = formatRupiah(amount);
+            document.getElementById('donation_amount').value = amount;
+        });
+    });
+</script>
+
+<style>
+    .amount-buttons .btn {
+        border: 1px solid #ccc; /* Atur gaya border sesuai kebutuhan */
+        border-radius: 5px; /* Atur border radius sesuai kebutuhan */
+        margin-right: 5px; /* Atur jarak antara tombol */
+        margin-bottom: 5px; /* Atur jarak antara tombol */
+    }
+
+    .amount-buttons .btn:hover {
+        border-color: #333; /* Ganti warna border saat tombol dihover */
+    }
+</style>

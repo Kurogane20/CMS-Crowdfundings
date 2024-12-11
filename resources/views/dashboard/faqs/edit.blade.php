@@ -1,3 +1,4 @@
+
 @extends('layouts.dashboard.app')
 @section('title') @if( ! empty($title)) {{ $title }} | @endif @parent @endsection
 

@@ -50,14 +50,14 @@
 <body>
   <div class="container">
     <div class="header">
-      <img src="127.0.0.1:8000/uploads/logo/1707281465gksbj-whatsapp-image-2024-02-07-at-075913-removebg-preview.png" alt="Company Logo">
+      <img class="main-logo" src="https://jadimanfaat.org/uploads/logo/1707337747ltdeq-favicon.png" alt="Company Logo" />
     </div>
     <div class="content">
-      <h1>Payment Notification</h1>
+      <h1>Kami Telah Menerima Donasi Dari :</h1>
       <div class="details">
         <table>
           <tr>
-            <th>Name:</th>
+            <th>Nama:</th>
             <td>{{ $paymentData['name'] }}</td>
           </tr>
           <tr>
@@ -65,26 +65,17 @@
             <td>{{ $paymentData['email'] }}</td>
           </tr>
           <tr>
-            <th>Amount:</th>
+            <th>Jumlah:</th>
             <td>{{ $paymentData['amount'] }} {{ $paymentData['currency'] }}</td>
           </tr>
           <tr>
-            <th>Payment Method:</th>
+            <th>Metode Pembayaran:</th>
             <td>{{ $paymentData['payment_method'] }}</td>
           </tr>         
-          <tr>
-            <th>Account Number:</th>
-            <td>{{ $paymentData['account_number'] }}</td>
-          </tr>
-          <tr>
-            <th>Branch Name:</th>
-            <td>{{ $paymentData['branch_name'] }}</td>
-          </tr>
-         
         </table>
       </div>
       <div class="footer">
-        <p>Thank you for your support!</p>
+        <p>Terimakasih telah berdonasi</p>
       </div>
     </div>
   </div>

@@ -3,7 +3,7 @@
 
 @section('content')
 
-    <section class="categories-wrap"> <!-- explore categories -->
+    <section class="categories-wrap" style="padding-top: 70px"> <!-- explore categories -->
         <div class="container">
 
             <div class="row">

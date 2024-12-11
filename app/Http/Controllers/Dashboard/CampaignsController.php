@@ -61,7 +61,7 @@ class CampaignsController extends Controller
             'slug'              => $slug,
             'short_description' => $request->short_description,
             'description'       => $request->description,
-            'campaign_owner_commission'              => get_option('campaign_owner_commission'),
+            // 'campaign_owner_commission'              => get_option('campaign_owner_commission'),
             'goal'              => $request->goal,
             'min_amount'        => $request->min_amount,
             'max_amount'        => $request->max_amount,

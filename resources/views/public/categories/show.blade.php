@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <section class="home-campaign section-bg-white">
+    <section class="home-campaign section-bg-white" style="padding-top: 70px">
         <div class="container">
 
             <div class="row">
